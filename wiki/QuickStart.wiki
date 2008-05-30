@@ -86,3 +86,73 @@ The entity attributes are:
 || *type*         || string  || yes      ||         || see _properties types_      ||
 || *unique*       || boolean || no       || false   || used to check that the property is unique ||
 || *usedby*       || list    || no       || nothing || used to define the controllers mapping ||
+
+The const attributes are:
+
+|| *attribute* || *type*  || *required* || *default* || *description*                ||
+|| *label*     || string  ||  no        ||  empty    || the const label used in the controllers ||
+|| *name*      || string  ||  yes       ||           || used to define the const name ||
+|| *value*     || mixed   ||  yes       ||           || the const value               ||
+
+properties types:
+
+  * *int*
+  * *float*
+  * *bool*
+  * *string*
+  * *const*
+  * *foreignkey*
+  * *manytomany*
+  * *email*
+  * *text*
+  * *html* (like text but the add/edit controller use a wysiwyg editor)
+  * *file* (to upload a file)
+  * *image* (to store image)
+
+*generate models*
+
+{{{
+  $ cd /path/to/framework
+  $ php bin/framework.php gen_models /path/to/my/project
+}}}
+
+*generate sql*
+
+{{{
+  $ php framework.php gen_sql /path/to/my/project
+}}}
+
+*create database*
+
+{{{
+  $ mysql -uroot -p
+  $ Enter password:
+  mysql> create database myDatabaseName;
+  mysql> GRANT ALL PRIVILEGES ON myDatabaseName.* TO myUser identified by 'myPassword';
+  mysql> GRANT ALL PRIVILEGES ON myDatabaseName.* TO myUser@localhost identified by 'myPassword';
+  mysql> GRANT ALL PRIVILEGES ON myDatabaseName.* TO myUser@'%' identified by 'myPassword';
+  mysql> FLUSH PRIVILEGES;
+  mysql> quit
+  $ mysql -umyUser -pmyPassword myDatabaseName < /path/to/my/project/config/sql/project.sql
+}}}
+
+*create menu*
+
+Edit the menu.xml in /path/to/my/project/config/xml/ :
+
+{{{
+  $ cd /path/to/my/project
+  $ vim config/xml/menu.xml
+}}}
+
+Example:
+
+{{{
+  <menu>
+    <item title="Menu1" link="" description="">
+      <item title="SousMenu1" link="" description="" />
+      <item title="SousMenu2" link="" description="" />
+    </item>
+    <item title="Menu2" link="" description="" />
+  </menu>
+}}}
