@@ -1,0 +1,51 @@
+<table class="grid Timetable_Table" width="98%" cellspacing="0" cellpadding="0" >
+    <thead>
+        <caption class="Timetable_Title">{$title}</caption>
+        <tr>
+            {foreach from=$header item=cell name=header}
+            <th class="Timetable_Header"
+                {if $cell.onclick} onclick="{$cell.onclick}" 
+                style="cursor:pointer;"{/if}>{$cell.label}</th>
+            {/foreach}
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td colspan="{$smarty.foreach.header.total}" 
+                class="Timetable_Actions">
+                {foreach from=$actions item=anAction}
+                {$anAction}&nbsp;
+                {/foreach}
+            </td>
+        </tr>
+    </tfoot>
+    <tbody>
+        {foreach from=$rows item=row}
+        <tr>
+            {if $row.hour}
+            <td class="Timetable_Hour">{$row.hour}</td>
+            {/if}
+            {foreach from=$row.cells item=datas}
+            <td class="Timetable_TD 
+                {if $datas.busy}Timetable_Busy{else}Timetable_Empty{/if}">
+                <div class="Timetable_TD_Header" {if $datas.header.onclick}
+                    onclick="{$datas.header.onclick}"
+                    style="cursor:pointer;"{/if}>{$datas.header.label}</div>
+                {if $datas.busy}
+                <div class="Timetable_Event" >
+                    <ul class="Timetable_UL">
+                        {foreach from=$datas.events item=event}
+                        <li class="Timetable_LI" 
+                        {if $event.onclick}onclick="{$event.onclick}" {/if}
+                        style="{if $event.onclick}cursor:pointer;{/if}
+                        background:{$event.background};">{$event.desc}</li>
+                        {/foreach}
+                    </ul>
+                </div>
+                {/if}
+            </td>
+            {/foreach}
+        </tr>
+        {/foreach}
+    </tbody>
+</table>

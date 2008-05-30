@@ -1,0 +1,142 @@
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * $Source: /home/cvs/framework/data/www/css/form.css,v $
+ *
+ * Classes css correspondant aux formulaires.
+ *
+ * @version   CVS: $Id: form.css,v 1.5 2007-10-04 15:50:27 bruno Exp $
+ * @copyright 2002-2006 ATEOR - All rights reserved
+ */
+
+/* tableau contenant le formulaire */
+.generic_form table {
+	font: 8pt Verdana, Arial, Helvetica, sans-serif;
+	width: 100%;
+    border: 1px #333 solid;
+}
+
+/* header et footer du tableau */
+.generic_form table thead tr,
+.generic_form table tfoot tr,
+.generic_form table tbody tr th {
+	color: #FFF;
+	background-color: #666;
+	font-weight: bold;
+    text-align: left;
+}
+
+/* pour les eventuels tableaux imbriqués advmultiselect */
+.generic_form table table {
+    border: 0;
+}
+.generic_form table tbody tr td table tr th {
+    color: #FFF;
+	font-weight: bold;
+}
+.generic_form table table tr td,
+.generic_form table table tr th {
+    padding: 3px;
+}
+
+.generic_form table table tr td[align="center"] {
+	width: 4%;
+    vertical-align: middle;
+}
+
+.generic_form table table tr td[valign="top"] {
+	width: 48%;
+}
+
+/* corps du tableau */
+.generic_form table tbody tr {
+	color : #000;
+	background-color: #D0D0D0;
+}
+
+/* alignement à droite du footer */
+.generic_form table tfoot tr td {
+	text-align: right;
+}
+
+/* alignement à droite du footer */
+.generic_form table tbody tr td.element_label {
+	width: 10%;
+    white-space: nowrap;
+}
+
+/* alignement à droite du footer */
+.generic_form table tbody tr td.element_html {
+	width: 40%;
+}
+
+/* largeur maximisée des élements du form */
+.generic_form .textfield,
+.generic_form .text,
+.generic_form .select,
+.generic_form textarea {
+	width: 99%;
+}
+
+.generic_form .select_with_add_button {
+    width: auto;
+}
+
+/* effet de mouseover sur les elements de form */
+.generic_form .textfield:hover,
+.generic_form .text:hover,
+.generic_form .textarea:hover {
+	background-color: #fffaea;
+}
+
+.generic_form .required_element {
+	background-color: #ffdfdf;
+}
+
+.generic_form .required_element:hover {
+	background-color: #ffdfdf;
+}
+
+/* Effet de curseur sur les boutons */
+.generic_form .button {
+	cursor: pointer;
+}
+
+/* Effet de curseur sur les boutons */
+.generic_form .form_error {
+    float: left;
+    padding: 2px;
+	color: #ff3333;
+}
+
+/* pour les searchform */
+
+#searchform_container {
+	position: relative;
+}
+
+#searchform_fields {
+	position: relative;
+}
+
+#searchform_switch {
+    float: right;
+    background-color: #dadada;
+    color: #666;
+    width: 19px;
+    height: 19px;
+    padding: 0px;
+    border: 1px #333 solid;
+    cursor: pointer;
+}
+
+input.togglebutton {
+    background-color: #dadada;
+    color: #666;
+    width: 19px;
+    height: 19px;
+    padding: 0px;
+    border: 1px #333 solid;
+    cursor: pointer;
+}
+

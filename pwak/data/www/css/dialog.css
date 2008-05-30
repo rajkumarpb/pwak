@@ -1,0 +1,39 @@
+#dialog {
+    margin: auto auto;
+    width: 400px;
+    border: 1px #666 solid;
+    position: relative;
+}
+
+#dialog_title, #dialog_buttons {
+    display: block;
+    background-color: #666;
+    color: #eaeaea;
+    padding: 5px;
+}
+
+#dialog_title {
+    font-weight: bold;
+}
+
+#dialog_image {
+    float: left;
+    padding: 5px;
+}
+
+#dialog_message {
+    display: block;
+    clear: right;
+    color: #666;
+    background-color: #eaeaea;
+    padding: 5px;
+    min-height: 50px;
+}
+
+#dialog_buttons {
+    text-align: right;
+}
+
+#dialog_buttons input {
+    cursor: pointer;
+}

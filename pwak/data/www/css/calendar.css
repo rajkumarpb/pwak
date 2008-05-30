@@ -1,0 +1,74 @@
+table.footPlanningTable tr{
+background-color: #666666;
+color : #FFFFFF;
+font-weight: bold;
+}
+.planningTable thead{
+border-collapse: collapse;
+}
+
+.planningCaption {
+font-family: verdana;
+font-size: 14pt;
+padding-bottom: 4pt;
+}
+
+.planningTh {
+font-family: verdana;
+font-size: 11px;
+text-align: center;
+background-color: #e7e3e7;
+padding: 5pt;
+line-height: 150%;
+border: 1px solid #ccc;
+}
+
+.planningTd {
+font-family: verdana;
+font-size: 11px;
+text-align: left;
+vertical-align: top;
+}
+
+.planning_calCell {
+vertical-align: top;
+border: 1px solid #b5bece;
+padding: 3px;
+}
+
+.planning_calCellEmpty {
+vertical-align: top;
+background-color: #dcdcdc;
+}
+
+.planning_calCellBusy {
+vertical-align: top;
+background-color: #efeffa;
+}
+
+.planning_dayNumber {
+text-align: right;
+background-color: #f8f8f8;
+border-bottom: 1px solid #ccc;
+}
+
+.planningUl {
+margin-left: 0;
+margin-top: 5pt;
+padding: 0 10pt 0 12pt;
+list-style-type: square;
+}
+
+.hour{
+width: 3%;
+font-family: verdana;
+font-size: 11px;
+text-align: center;
+background-color: #e7e3e7;
+padding: 5pt;
+line-height: 150%;
+border: 1px solid #ccc;
+}
+tr{
+vertical-align: top;
+}

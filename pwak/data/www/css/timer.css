@@ -1,0 +1,27 @@
+#timer {
+    display: none;
+    position: absolute;
+    border: 1px #666 solid;
+    border-top: 0;
+    width: 300px;
+    top: 21px;
+    left: 21px;
+}
+#timer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#timer li {
+    border-top: 1px #666 solid;
+    background-color: #eaeaea;
+    list-style: none;
+    padding: 4px;
+}
+
+#timer li.timer_total {
+    background-color: #666;
+    color: #fff;
+    font-weight: bold;
+}
