@@ -60,7 +60,7 @@ The entity attributes are:
 || *parent*    || string || no       || none        || parent entity                 ||
 || *tablename* || string || no       || entity name || database table name           ||
 
-The entity attributes are:
+The property attributes are:
 
 || *attribute*    || *type*  ||*required*||*default*|| *description*                ||
 || *add_button*   || boolean || no       || false   || used to add a button to add foreign key objects. ||
