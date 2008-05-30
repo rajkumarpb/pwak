@@ -96,7 +96,7 @@ class Frontend
             $skel = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' 
                 . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data';
         } 
-        return self::copyDir($skel, $project_path, false, array('CVS'));
+        return self::copyDir($skel, $project_path, false, array('CVS', '.svn'));
     }
 
     // }}}
@@ -121,7 +121,7 @@ class Frontend
         // update project
         // skip files that can be modified by the user
         $skip = array('CVS', '.cvsignore', 'project.xml', 'menu.xml',
-            'project.conf', 'config.inc.php');
+            'project.conf', 'config.inc.php', '.svn');
         $skel = '@DATA_DIR@' . DIRECTORY_SEPARATOR . FRAMEWORK_NAME . 
             DIRECTORY_SEPARATOR . 'data';
         if(!is_dir($skel)) {
