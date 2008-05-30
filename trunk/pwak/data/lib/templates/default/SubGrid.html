@@ -1,0 +1,13 @@
+</td>
+{section name=SubGridContent loop=$NbColumn}
+            <td>
+{section name=GridCol loop=$SubGridRow}
+                {$SubGridRow[GridCol][SubGridContent]}<br/>
+{/section}
+            </td>
+{sectionelse}
+            <td colspan="{$NbColumnIfEmpty}">
+                {t}No record found{/t}
+            </td>
+{/section}
+            <td>

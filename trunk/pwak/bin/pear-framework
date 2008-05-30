@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# $Source: /home/cvs/framework/bin/pear-framework,v $
+# version CVS: $Id: pear-framework,v 1.1 2007-10-18 08:24:25 guil Exp $
+
+exec @PHP_BIN@ @PHP_DIR@/framework/bin/framework.php $@

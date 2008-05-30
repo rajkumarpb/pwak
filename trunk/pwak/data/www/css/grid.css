@@ -1,0 +1,203 @@
+/* Classes correspondant à l'affichage des grilles */
+
+/* container du grid */
+
+.grid {
+	border: 1px inset #000000;
+	background-color: #666666;
+}
+
+
+/* zone d'infos sur le nombre d'enregistrement */
+
+.grid #bear {
+    background-color: #CCCCCC;
+    padding: 2px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: right;
+    border: 1px outset #ffffff;
+}
+
+/* Concerne le layer de customisation de l'affichage des grids */
+
+#custom_display_layer {
+    display: none;
+	position: absolute;
+    background-color: #eaeaea;
+	border: 1px #666 solid;
+	left: 40px;
+	top: 40px;
+	width: 450px;
+	height: 350px;
+}
+#custom_display_header_layer {
+    cursor: move;
+    width: 450px;
+	height: 22px;
+    /*background-image: url('../images/grid_custom_display_bar.png');*/
+}
+#custom_display_close_button {
+	float: right;
+    cursor: pointer;
+}
+
+/* header et footer du grid */
+
+.grid table thead tr,
+.grid table tfoot tr {
+	color: #eaeaea;
+	background-color: #666;
+	font-weight:bold;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.grid_numeric {
+    text-align: right;
+	padding-right: 40px;
+	white-space: nowrap;
+}
+.grid_alphanumeric {
+    text-align: left;
+}
+
+/* liens hypertexte du header */
+
+.grid table thead a {
+	color: #F0F0F0;
+	font-weight:bold;
+    text-decoration: underline;
+}
+
+.grid table thead a:hover {
+	color: #FFFFFF;
+	font-weight:bold;
+    text-decoration: none;
+}
+
+.grid table thead tr td {
+    white-space: nowrap;
+}
+
+/* corps du grid */
+
+.grid table tbody tr {
+	background-color: #D0D0D0;
+}
+
+.grid table tbody tr td {
+    border-bottom: 1px solid #CCC;
+}
+
+.grid table tbody tr td a {
+	color: #000000;
+	text-decoration: underline;
+}
+
+.grid table tbody tr td a:hover {
+	text-decoration: none;
+}
+
+.grid table tbody tr.grid_row_odd {
+	background-color: #E0E0E0;
+}
+
+.grid table tbody tr.grid_row_even {
+	background-color: #D0D0D0;
+}
+
+.grid table tbody tr.hover,
+.grid table tbody tr:hover {
+	background-color: #ffffe3;
+}
+
+.grid table tbody tr.grid_row_highlighted_even {
+	background-color: #99CC99;
+}
+
+.grid table tbody tr.grid_row_highlighted_odd {
+	background-color: #CCFFCC;
+}
+
+.grid table tbody tr td.grid_checkbox_column {
+    text-align: right;
+    width: 5px;
+}
+
+.grid table tbody tr.grid_dnd_sortable td {
+    cursor: move;
+}
+
+/* bouton d'annulation du filtre et pager */
+.grid .grid_filter_button {
+    float: left;
+    padding: 2px;
+    padding-right: 10px;
+}
+
+/* Effet de curseur sur les boutons */
+.grid .button {
+	cursor: pointer;
+}
+
+.grid .group{
+    border: 1px outset #666666;
+    text-align: center;
+}
+
+.grid .group_item {
+    border: 1px inset #333333;
+    text-align: center;
+}
+
+.grid table tbody tr td input.ReadOnlyField {
+    background-color: #E1E8EF;
+    color : #000000;
+	border: 1px #000000 dotted;
+    padding-right: 3px;
+	text-align: right;
+}
+
+.grid .grid_actions {
+    text-align: right;
+    float: right;
+    padding: 2px;
+}
+
+.grid .grid_pager {
+    float: left;
+	background-color: #666;
+	color: #f73;
+    font-size: 12px;
+    font-weight: 800;
+    padding-left: 2px;
+}
+
+.grid .grid_pager a {
+	color: #fafafa;
+    text-decoration: none;
+}
+
+/* Concerne le layer de customisation de l'affichage des searchforms */
+
+#custom_search_layer {
+    display: none;
+	position: absolute;
+    background-color: #eaeaea;
+	border: 1px #666 solid;
+	left: 40px;
+	top: 40px;
+	width: 450px;
+	height: 350px;
+}
+#custom_search_header_layer {
+    cursor: move;
+    width: 450px;
+	height: 22px;
+    /*background-image: url('../images/grid_custom_display_bar.png');*/
+}
+#custom_search_close_button {
+	float: right;
+    cursor: pointer;
+}

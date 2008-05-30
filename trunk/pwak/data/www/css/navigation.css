@@ -1,0 +1,90 @@
+
+/* containers ul des 2 niveaux de navigation */
+
+ul.nav {
+    clear: both;
+    display: block;
+    margin: 0;
+    margin-top: 0;
+    padding: 0px;
+    list-style: none;
+    background-color: #e0e0e0;
+}
+
+ul.nav:after { /* clear non-IE */
+    clear: both;
+    content: '.';
+    display: block;
+    height:0; 
+    visibility:hidden;
+} 
+
+#nav_1 {
+	background-position: left top;
+	background-repeat: repeat-y;
+	background-image: url('../images/logo_background.png');
+	border-bottom: 1px #eaeaea solid;
+    padding-top: 8px;
+    padding-left: 10px;
+}
+
+#nav_2 {
+	background-position: left top;
+	background-repeat: repeat;
+	background-image: url('../images/submenu_background.png');
+	border-bottom: 1px #aaa solid;
+}
+
+/* propriétés communes au li des différents niveaux de navigation */
+
+ul.nav li {
+    display: inline;
+    float: left;
+    padding: 0;
+    padding: 4px;
+    margin: 0;
+}
+
+
+/* propriétés des li de niveau 1 */
+
+#nav_1 li {
+    color: #eaeaea;
+    background-color: #666;
+	border-right: 1px #333 solid;
+}
+
+#nav_1 li.nav_active {
+    color: #333;
+    background-color: #f73;
+	border-right: 1px #ccc solid;
+}
+
+#nav_1 li a,
+#nav_1 li a:hover,
+#nav_1 li a:active,
+#nav_1 li a:visited {
+    color: #eee;
+}
+
+#nav_1 li.nav_active a,
+#nav_1 li.nav_active a:hover,
+#nav_1 li.nav_active a:active,
+#nav_1 li.nav_active a:visited {
+    color: #333;
+}
+
+
+/* propriétés des li de niveau 2 */
+
+#nav_2 li {
+    color: #333;
+	border-right: 1px #aaa solid;
+}
+
+#nav_2 li.nav_active {
+    color: #333;
+    background-color: #eee;
+	border: 1px #ddd;
+    font-weight: bold;
+}

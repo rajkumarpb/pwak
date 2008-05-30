@@ -1,0 +1,113 @@
+{if $preContent}
+  <div id="pre_content">{$preContent}</div>
+{/if}
+<!-- Javascript relatif au formulaire -->
+{$form.javascript}
+<!-- Fin Javascript -->
+
+<!-- Formulaire -->
+<form {$form.attributes} class="generic_form">
+
+    <table cellspacing="0" cellpadding="5" border="0" id="genericFormTable">
+        <!-- Form header -->
+        <thead>
+        <tr>
+            <td colspan="4">
+              {$formTitle}
+              <!-- Champs cachés -->
+              {$form.hidden}
+              <!-- Fin champs cachés -->
+        </tr>
+        </thead>
+        <!-- End form header -->
+{foreach from=$form.sections name=sections item=section}
+{if $smarty.foreach.sections.first}
+        <!-- Form footer with buttons -->
+        <tfoot>
+        <tr>
+            <td colspan="4">
+{foreach from=$section.elements name=buttons item=element}
+{if $smarty.foreach.buttons.last}
+                {$element.html}
+{else}
+                {$element.html}&nbsp;
+{/if}
+{/foreach}
+            </td>
+        </tr>
+        </tfoot>
+{else}
+  <!-- Form body -->
+{if $smarty.foreach.sections.iteration eq 2}
+        <tbody>
+{else}
+        <tr>
+            <th colspan="4">{$section.header}</th>
+        </tr>
+{/if}
+{section name=elements loop=$section.elements}
+{assign var="type" value=$section.elements[elements].name|regex_replace:"/(advmultiselect)(.+)/":"advmultiselect"}
+{if $type=='advmultiselect'}
+{if $smarty.section.elements.iteration gt 1 and $trset eq 0}
+{assign var="trset" value=1}
+            <td colspan="2">&nbsp;</td>
+        </tr>
+{/if}
+        <tr>
+            <td colspan="4">{$section.elements[elements].html}</td>
+        </tr>
+{else}
+{if $smarty.section.elements.iteration % 2 eq 1}
+{assign var="trset" value=0}
+        <tr>
+{/if}
+            <td class="element_label">
+{if $section.elements[elements].required}
+                <div class="form_error">*</div>
+{/if}
+{if $section.elements[elements].elements}
+                {$section.elements[elements].label}
+{else}
+                <label for="{$section.elements[elements].name}">{$section.elements[elements].label}</label>
+{/if}
+            </td>
+            <td class="element_html">
+{if $section.elements[elements].error}
+                <div
+                    class="form_error">{$section.elements[elements].error}</div>
+{/if}
+{if $section.elements[elements].elements}
+{foreach from=$section.elements[elements].elements name=groups item=element}
+{if $element.type == 'password' and $smarty.foreach.groups.iteration eq 2}
+                {$element.html}&nbsp;({t}confirm{/t})
+{else}
+                {$element.html}
+{/if}
+{/foreach}
+{else}
+                {$section.elements[elements].html}
+{/if}
+            </td>
+{if $smarty.section.elements.iteration % 2 eq 0}
+{assign var="trset" value=1}
+        </tr>
+{elseif $smarty.section.elements.last}
+{assign var="trset" value=1}
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+{/if}
+{/if}
+{/section}
+{/if}
+{/foreach}
+{$additionalContent}
+        </tbody>
+        <!-- End form body -->
+    </table>
+    <p>{$form.requirednote}</p>
+</form>
+<!-- Fin formulaire -->
+{if $postContent}
+  <div id="post_content">{$postContent}</div>
+{/if}

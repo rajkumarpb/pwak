@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=iso-8859-15" />
+    <meta name="author" content="Copyright 2002-2006 ATEOR - All rights reserved." />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>{$PageTitle}</title>
+
+    <!-- js -->
+    <script type="text/javascript" src="js/MochiKit/MochiKit.js"></script>
+    <script type="text/javascript" src="JS_Messages.php"></script>
+    <script type="text/javascript" src="js/framework.js"></script>
+    <script type="text/javascript" src="JS_AdvMultiSelect.php"></script>
+{$AJAXJavascript}
+{section name=JS loop=$JavaScript}
+    <script type="text/javascript" src="{$JavaScript[JS]}"></script>
+{/section}
+    <!-- Script pour la gestion de la transparence sur les png 24 -->
+    <script type="text/javascript" src="js/lib-functions/pngfix.js"></script>
+    <!-- css styles -->
+    <!--[if IE]>
+    <style type="text/css" media="screen">
+        @import "css/ie.css";
+    </style>
+    <![endif]-->
+    <style type="text/css" media="screen">
+        @import "css/main.css";
+        @import "css/form.css";
+        @import "css/grid.css";
+        @import "css/navigation.css";
+{if $ScreenCSS}
+{section name=SCSS loop=$ScreenCSS}
+        @import "{$ScreenCSS[SCSS]}";
+{/section}
+{/if}
+    </style>
+{if $PrintCSS}
+    <style type="text/css" media="print">
+{section name=PCSS loop=$ScreenCSS}
+        @import "{$PrintCSS[PCSS]}";
+{/section}
+    </style>
+{/if}
+</head>
+
+<body>
+<!-- Main content -->
+{$PageContent}
+{if $TimerStats}
+{$TimerStats}
+{/if}
+</body>
+</html>
