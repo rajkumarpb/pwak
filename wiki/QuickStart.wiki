@@ -52,3 +52,10 @@ Entity description:
 }}}
 
 The entity attributes are:
+
+|| *attribute* || *type* ||*required*|| *default*   ||  *description*                ||
+|| *feature*   || list   || no       || nothing     || used to define the controllers mapping ||
+|| *label*     || string || no       || empty       || entity label                  ||
+|| *name*      || string || yes      ||             || entity name                   ||
+|| *parent*    || string || no       || none        || parent entity                 ||
+|| *tablename* || string || no       || entity name || database table name           ||
