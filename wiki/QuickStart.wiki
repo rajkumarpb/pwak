@@ -1,3 +1,4 @@
+#labels Phase-Deploy,Featured
 = PWAK Framework Quick Start Guide =
 
 
@@ -7,7 +8,7 @@
 
 == Installation ==
 
-download PWAK
+Download PWAK
 
 pear install Console_CommandLine
 
@@ -20,7 +21,7 @@ pear install Console_CommandLine
   $ php bin/framework.php create_project /path/to/my/project
 }}}
 
-edit the project configuration file
+Edit the project configuration file:
 
 {{{
   $ cd /path/to/my/project
@@ -30,5 +31,24 @@ edit the project configuration file
 
 ==== create project xml ====
 
-edit the project.xml file in /path/to/my/project/config/xml/ to add your
+Edit the project.xml file in /path/to/my/project/config/xml/ to add your
 entities.
+
+{{{
+  $ cd /path/to/my/project
+  $ vim config/xml/project.xml
+}}}
+
+Entity description:
+
+{{{
+  <entity name="EntityName">
+    <property type="string" name="PropertyName">
+    <property type="const" name="ConstName">
+      <const name="CONSTNAME1" value="0" />
+      <const name="CONSTNAME2" value="1" />
+    </property>
+  </entity>
+}}}
+
+The entity attributes are:
