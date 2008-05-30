@@ -135,7 +135,7 @@ properties types:
   mysql> GRANT ALL PRIVILEGES ON myDatabaseName.* TO myUser@'%' identified by 'myPassword';
   mysql> FLUSH PRIVILEGES;
   mysql> quit
-  $ mysql -umyUser -pmyPassword myDatabaseName < /path/to/my/project/config/sql/project.sql
+  $ mysql -umyUser -p myDatabaseName < /path/to/my/project/config/sql/project.sql
 }}}
 
 *create menu*
