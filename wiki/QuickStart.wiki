@@ -1,0 +1,34 @@
+= PWAK Framework Quick Start Guide =
+
+
+ * License: [http://opensource.org/licenses/mit-license.php MIT License]
+ * Copyright:
+ * Authors:
+
+== Installation ==
+
+download PWAK
+
+pear install Console_CommandLine
+
+
+=== First steps ===
+==== create project ====
+
+{{{
+  $ cd /path/to/framework
+  $ php bin/framework.php create_project /path/to/my/project
+}}}
+
+edit the project configuration file
+
+{{{
+  $ cd /path/to/my/project
+  $ cp config/project.conf.dist config/project.conf
+  $ vim config/project.conf
+}}}
+
+==== create project xml ====
+
+edit the project.xml file in /path/to/my/project/config/xml/ to add your
+entities.
