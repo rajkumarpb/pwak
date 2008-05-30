@@ -18,6 +18,8 @@ Installation
 ------------
 download
 
+install pear Console_CommandLine module 
+
 install
 
 .. _first steps:
