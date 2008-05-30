@@ -8,7 +8,9 @@
 
 == Installation ==
 
-Download [http://code.google.com/p/pwak/downloads/list PWAK]
+Download PWAK
+([http://code.google.com/p/pwak/downloads/list http], 
+[http://code.google.com/p/pwak/source/checkout svn])
 
 pear install [http://pear.php.net/package/Console_CommandLine Console_CommandLine]
 
@@ -62,30 +64,30 @@ The entity attributes are:
 
 The property attributes are:
 
-|| *attribute*    || *type*  ||*required*||*default*|| *description*                ||
-|| *add_button*   || boolean || no       || false   || used to add a button to add foreign key objects. ||
-|| *bidirectional*|| boolean || no       || false   || used to reflexive foreign keys, from entity to entity  ||
-|| *class*        || string  || yes if   type is foreign key ||         || the entity name of the type is entity linked with the foreign key ||
-|| *default*      || mixed   || no       || empty   || default values of the  property ||
-||*emptyfordelete*|| boolean || no       || false   ||                              ||
-|| *field*        || string  || no       ||         ||                              ||
-|| *i18n*         || boolean || no       || false   || if true the getters used  gettext to translate the property ||
-|| *inplace_edit* || boolean || no       || false   || true to edit the foreign key attributes in the add/edit controller ||
-|| *label*        || string  || no       || empty   ||                              ||
-|| *length*       || string  || no       ||         ||                              ||
-|| *linkfield*    || string  || no       ||         ||                              ||
-|| *linktable*    || string  || no       ||         ||                              ||
-|| *multiplicity* ||         || no       ||         ||                              ||
-|| *name*         || string  || yes      ||         ||                              ||
-|| *navigable*    || boolean || no       || false   || only for the foreign key     ||
-|| *navigablename*|| string  || no       ||         ||                              ||
-|| *ondelete*     ||         || no       ||         ||                              ||
-|| *required*     || boolean || no       || false   || the property must be provide in add/edit controllers ||
-|| *section*      || string  || no       || empty   ||                              ||
-|| *shortlabel*   || string  || no       || empty   ||                              ||
-|| *type*         || string  || yes      ||         || see _properties types_      ||
-|| *unique*       || boolean || no       || false   || used to check that the property is unique ||
-|| *usedby*       || list    || no       || nothing || used to define the controllers mapping ||
+|| *attribute*      || *type*  ||*required*||*default*|| *description*                ||
+|| *add_button*     || boolean || no       || false   || used to add a button to add foreign key objects. ||
+|| *bidirectional*  || boolean || no       || false   || used to reflexive foreign keys, from entity to entity  ||
+|| *class*          || string  || yes if   type is foreign key ||         || the entity name of the type is entity linked with the foreign key ||
+|| *default*        || mixed   || no       || empty   || default values of the  property||
+|| *emptyfordelete* || boolean || no       || false   ||                              ||
+|| *field*          || string  || no       ||         ||                              ||
+|| *i18n*           || boolean || no       || false   || if true the getters used  gettext to translate the property ||
+|| *inplace_edit*   || boolean || no       || false   || true to edit the foreign key attributes in the add/edit controller ||
+|| *label*          || string  || no       || empty   ||                              ||
+|| *length*         || string  || no       ||         ||                              ||
+|| *linkfield*      || string  || no       ||         ||                              ||
+|| *linktable*      || string  || no       ||         ||                              ||
+|| *multiplicity*   ||         || no       ||         ||                              ||
+|| *name*           || string  || yes      ||         ||                              ||
+|| *navigable*      || boolean || no       || false   || only for the foreign key     ||
+|| *navigablename*  || string  || no       ||         ||                              ||
+|| *ondelete*       ||         || no       ||         ||                              ||
+|| *required*       || boolean || no       || false   || the property must be provide in add/edit controllers ||
+|| *section*        || string  || no       || empty   ||                              ||
+|| *shortlabel*     || string  || no       || empty   ||                              ||
+|| *type*           || string  || yes      ||         || see _properties types_      ||
+|| *unique*         || boolean || no       || false   || used to check that the property is unique ||
+|| *usedby*         || list    || no       || nothing || used to define the controllers mapping ||
 
 The const attributes are:
 
