@@ -21,7 +21,7 @@
  * @author    ATEOR dev team <dev@ateor.com>
  * @copyright 2003-2008 ATEOR <contact@ateor.com> 
  * @license   http://opensource.org/licenses/mit-license.php MIT License 
- * @version   SVN: $Id: xmi2xml.php,v 1.7 2008-05-30 09:23:47 david Exp $
+ * @version   SVN: $Id$
  * @link      http://pwak.googlecode.com
  * @since     File available since release 0.1.0
  * @filesource
@@ -39,7 +39,7 @@ define('MAX_CHAR_PER_LINE', 79);
  * XMLElement 
  * 
  * @uses SimpleXMLElement
- * @version $Id: xmi2xml.php,v 1.7 2008-05-30 09:23:47 david Exp $
+ * @version $Id$
  * @author guillaume luchet <guillaume@geelweb.org> 
  * @package Framework 
  * @subpackage Frontend
@@ -208,7 +208,7 @@ class XMLElement extends SimpleXMLElement {
 /**
  * ArgoUmlXmi2Xml 
  * 
- * @version $Id: xmi2xml.php,v 1.7 2008-05-30 09:23:47 david Exp $
+ * @version $Id$
  * @author guillaume luchet <guillaume@geelweb.org> 
  * @package Framework 
  * @subpackage Frontend

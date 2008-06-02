@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
@@ -26,8 +27,6 @@
  * @since     File available since release 0.1.0
  * @filesource
  */
-
-#!/usr/bin/env php
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
