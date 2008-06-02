@@ -21,13 +21,11 @@
  * @author    ATEOR dev team <dev@ateor.com>
  * @copyright 2003-2008 ATEOR <contact@ateor.com> 
  * @license   http://opensource.org/licenses/mit-license.php MIT License 
- * @version   SVN: $Id: Dispatcher.php,v 1.6 2008-05-30 09:23:47 david Exp $
+ * @version   SVN: $Id$
  * @link      http://pwak.googlecode.com
  * @since     File available since release 0.1.0
  * @filesource
  */
-
-require_once(MODELS_DIR . '/UserAccount.php');
 
 /**
  * Ensemble de méthodes pour le dispatching des urls.

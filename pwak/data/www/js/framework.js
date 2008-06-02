@@ -6,7 +6,7 @@
  * Mini librairie pour le framework contenant des fonctions utilitaires qui ne
  * sont pas directement implémentées dans MochiKit.
  *
- * @version    CVS: $Id: framework.js,v 1.9 2008-04-24 09:21:06 david Exp $
+ * @version    CVS: $Id$
  * @copyright  2002-2006 ATEOR - All rights reserved
  */
 

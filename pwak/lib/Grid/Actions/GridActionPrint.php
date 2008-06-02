@@ -21,7 +21,7 @@
  * @author    ATEOR dev team <dev@ateor.com>
  * @copyright 2003-2008 ATEOR <contact@ateor.com> 
  * @license   http://opensource.org/licenses/mit-license.php MIT License 
- * @version   SVN: $Id: GridActionPrint.php,v 1.4 2008-05-30 09:23:47 david Exp $
+ * @version   SVN: $Id$
  * @link      http://pwak.googlecode.com
  * @since     File available since release 0.1.0
  * @filesource
