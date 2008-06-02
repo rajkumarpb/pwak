@@ -21,7 +21,7 @@
  * @author    ATEOR dev team <dev@ateor.com>
  * @copyright 2003-2008 ATEOR <contact@ateor.com> 
  * @license   http://opensource.org/licenses/mit-license.php MIT License 
- * @version   SVN: $Id: Auth.php,v 1.10 2008-05-30 09:23:46 david Exp $
+ * @version   SVN: $Id$
  * @link      http://pwak.googlecode.com
  * @since     File available since release 0.1.0
  * @filesource
@@ -35,7 +35,6 @@ if (!defined('ROOT_USERID')) {
  * Dépendences
  */
 require_once('adodb/adodb.inc.php');
-require_once(MODELS_DIR . '/UserAccount.php');
 
 /**
  * Auth
@@ -61,6 +60,14 @@ class Auth {
      */
     protected static $instance = false;
 
+    /**
+     * Auth::hasAuth
+     *
+     * @var    object $instance
+     * @access public
+     */
+    public static $hasAuth = true;
+
     // }}}
     // Constructeur {{{
 
@@ -83,6 +90,7 @@ class Auth {
      */
     public static function Singleton() {
         if (!self::$instance) {
+            self::$hasAuth = @include_once MODELS_DIR . '/UserAccount.php';
             Session::singleton();
             self::$instance = new Auth();
         }
@@ -101,6 +109,9 @@ class Auth {
      * @return mixed UserAccount ou Exception
      */
     public function login($login, $realm, $pwd) {
+        if (!self::$hasAuth) {
+            return false;
+        }
         $user = Object::load('UserAccount',
             array('Login'=>$login, 'Password'=>sha1($pwd)));
         $dbID = defined('DATABASE_ID')?DATABASE_ID:false;
@@ -157,6 +168,9 @@ class Auth {
      * @return mixed object UserAccount ou false
      */
     public function getUser() {
+        if (!self::$hasAuth) {
+            return false;
+        }
         if (isset($_SESSION[USER_SESSION_NAME])) {
             return Object::load('UserAccount', $_SESSION[USER_SESSION_NAME]);
         }
@@ -173,6 +187,9 @@ class Auth {
      * @return mixed integer ou false
      */
     public static function getUserId() {
+        if (!self::$hasAuth) {
+            return false;
+        }
         if (isset($_SESSION[USER_SESSION_NAME])) {
             return $_SESSION[USER_SESSION_NAME];
         }
@@ -190,6 +207,9 @@ class Auth {
      * @return mixed object Actor ou false
      */
     public function getActor() {
+        if (!self::$hasAuth) {
+            return false;
+        }
         return ($this->isUserConnected())?$this->getUser()->getActor():false;
     }
 
@@ -204,6 +224,9 @@ class Auth {
      * @return mixed integer ou false
      */
     public function getActorId() {
+        if (!self::$hasAuth) {
+            return false;
+        }
         $actor = $this->getActor();
         return (method_exists($actor, 'getId'))?$actor->getId():false ;
     }
@@ -219,6 +242,9 @@ class Auth {
      * @return string
      */
     public function getIdentity() {
+        if (!self::$hasAuth) {
+            return false;
+        }
         return ($this->isUserConnected())?
              $this->getUser()->getIdentity():E_NO_USER;
     }
@@ -279,6 +305,9 @@ class Auth {
      */
     public function checkProfiles($profilesArray = array(),
         $options = array('url'=>false , 'showErrorDialog'=>true)) {
+        if (!self::$hasAuth) {
+            return true;
+        }
         if ($this->isRootUserAccount()) {
             return true;
         }
@@ -358,6 +387,9 @@ class Auth {
      * @return mixed object Profile ou false
      */
     public function getProfile() {
+        if (!self::$hasAuth) {
+            return false;
+        }
         return ($this->isUserConnected())?$this->getUser()->getProfile():false;
     }
 
