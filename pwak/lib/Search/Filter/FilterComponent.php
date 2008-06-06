@@ -48,7 +48,7 @@ class FilterComponent {
      *
      * @access public
      */
-    public $operator = false;
+    public $operator = self::OPERATOR_AND;
 
     /**
      * Le tableau des tables pour les join
@@ -137,10 +137,9 @@ class FilterComponent {
         $result = /*$operatorString =*/ $padding = '';
         $count = count($this->_items);
         if ($count > 1){
-            $operatorString = $this->operator;
             for($i = 0; $i < $count; $i++){
                 $result .= $padding . $this->_items[$i]->toSQL($stateMachine);
-                $padding = $operatorString;
+                $padding = $this->operator;
             }
             return '(' . $result . ')';
         }
