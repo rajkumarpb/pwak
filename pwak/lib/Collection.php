@@ -490,21 +490,28 @@ class Collection implements Iterator, ArrayAccess, Countable
     /**
      * Retourne un tableau Id => object->$method()
      *
-     * @param string $attr the method to use for array values instead of 
-     *                     toString method (optional)
+     * @param string $method the method to use for array values instead of 
+     *                       toString method (optional)
+     * @param bool   $sort   determine whether to sort or not the array
      *
      * @access public
      * @return array
      */
-    public function toArray($method=false) {
+    public function toArray($method=false, $sort=true) {
         $result = array();
         $count  = $this->getCount();
         $method = $method === false ? 'toString' : $method;
         for($i = 0; $i < $count; $i++) {
-            $item = $this->getItem($i);
-            $result[$item->getId()] = $item->$method();
+            $item  = $this->getItem($i);
+            $value = $item->$method();
+            if ($value instanceof Object) {
+                $value = $value->toString();
+            }
+            $result[$item->getId()] = $value;
         }
-        asort($result);
+        if ($sort) {
+            asort($result);
+        }
         return $result;
     }
 
