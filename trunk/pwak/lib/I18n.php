@@ -412,6 +412,64 @@ class I18N
             'extract_replacement' => array('', '.')
         ),
         // }}}
+        // pl_PL {{{
+        'pl_PL' => array(
+            'name'            => 'Polski',
+            'code'            => 'pl_PL',
+            'shortcode'       => 'pl',
+            'encoding'        => 'ISO-8859-2',
+            'currency_format' => '%s{$CURRENCY}',
+            'percent_format'  => '%s %%',
+            'thousand_sep'    => ' ',
+            'decimal_sep'     => ',',
+            'date_format'     => array(
+                I18N::TIME_SHORT             => '%H:%M',
+                I18N::TIME_LONG              => '%H:%M:%S',
+                I18N::DATE_SHORT             => '%d/%m/%y',
+                I18N::DATE_LONG              => '%d/%m/%Y',
+                I18N::DATE_SHORT_TEXTUAL     => '%A, %d %B %Y',
+                I18N::DATE_LONG_TEXTUAL      => '%A, %d %B %Y',
+                I18N::DATETIME_SHORT         => '%d/%m/%y %H:%M',
+                I18N::DATETIME_LONG          => '%d/%m/%Y %H:%M',
+                I18N::DATETIME_FULL          => '%d/%m/%Y %H:%M:%S',
+                I18N::DATETIME_SHORT_TEXTUAL => '%A, %d %B %Y %H:%M',
+                I18N::DATETIME_LONG_TEXTUAL  => '%A, %d %B %Y %H:%M',
+                I18N::DATETIME_FULL_TEXTUAL  => '%A, %d %B %Y %H:%M:%S'
+            ),
+            'days' => array(
+                array('niedziela', 'ndz.'),
+                array('poniedzia¿ek', 'pon'),
+                array('wtorek', 'wt.'),
+                array('¿roda', '¿r.'),
+                array('czwartek', 'czw.'), 
+                array('pi¿tek', 'pt.'),
+                array('sobota', 'sob.')
+            ),
+            'monthes' => array(
+                array('stycze¿', 'sty.'),
+                array('luty', 'lut.'),
+                array('marzec', 'mar.'),
+                array('kwiecie¿', 'kwi.'),
+                array('maj', 'maj'), 
+                array('czerwiec', 'cze.'),
+                array('lipiec', 'lip.'),
+                array('sierpie¿', 'sie.'),
+                array('wrzesie¿', 'wrz.'),
+                array('pa¿dziernik', 'pa¿.'),
+                array('listopad', 'lis.'),
+                array('grudzie¿', 'gru.')
+            ),
+            'html_select_date_format' => 'dmY',
+            'duration_format' => array(
+                'day'    => '%s d.',
+                'hour'   => '%s godz.',
+                'minute' => '%s min.'
+            ),
+            // en deutsch, on écrit: 100 000,45
+            'extract_pattern' => array(' ', ','),
+            'extract_replacement' => array('', '.')
+        ),
+        // }}}
     );
 
     /**
