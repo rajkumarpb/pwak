@@ -1,0 +1,26 @@
+$Id: TODO,v 1.3 2008-05-30 09:23:46 david Exp $
+
+FRAMEWORK
+=========
+
+* Nettoyer le code (Coding Standards) et documenter ce qui ne l'est pas,
+* Nettoyer le javascript utilisé par les divers composants (Grid,
+  Searchform...):
+    - simplifier le truc,
+    - utiliser moins de fichiers, centraliser le code dans les composants,
+    - voir si on peut utiliser une lib js externe mieux faite,
+* Nettoyer les css/images utilisées par les composants et les mettres dans ce
+  module, si possible faire un design générique avec un système facile pour
+  personaliser les couleurs dans les applis utilisant le fw,
+* Utiliser PDO pour l'abstraction au SGDB
+  (voir http://fr3.php.net/manual/fr/ref.pdo),
+* Utiliser les exceptions php5 (try/catch)
+
+
+DOCUMENTATION
+=============
+
+* L'écrire (prendre comme base le wiki et l'améliorer) dans un format si
+  pratique pour être converti dans de multiples format (REST, latex...)
+* Faire des exemples dans un dossier "examples"
+

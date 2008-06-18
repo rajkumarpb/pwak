@@ -1,0 +1,219 @@
+<!-- Grid -->
+<script type="text/javascript">
+<!--
+{$gridJS}
+-->
+</script>
+<!-- hidden utilisé par GridActionToggleProperty, pas dans le render de l'action
+pour ne pas etre en double lorsque les actions sont en haut et en bas du grid -->
+<input type="hidden" name="Grid_ToggleAction" value="0" id="Grid_ToggleAction" />
+<!-- nom de l'entité cible du grid -->
+<input type="hidden" name="Grid_EntityName" value="{$GridEntityName}" id="Grid_EntityName" />
+<!-- nom de l'attribut sur lequel est effectué le dnd sort -->
+<input type="hidden" name="Grid_DndSortableField" value="{$GridDndSortableField}" id="Grid_DndSortableField" />
+
+<div class="grid">
+    <div id="bear">
+{if count($GridRow) eq 0 }
+        {t}No record found{/t}.
+{elseif $GridTotalRowCount eq 1}
+        {t}Page{/t} {$CurrentPageIndex}/{$PageTotal} - {$GridTotalRowCount} {t}record.{/t} &nbsp;
+{else}
+        {t}Page{/t} {$CurrentPageIndex}/{$PageTotal} - {$GridTotalRowCount} {t}records{/t}&nbsp;
+{/if}
+{if $customizationEnabled}
+<a href="javascript:void(0);" onclick="{$GridHeader[GridHeader].Link}" title="{t}Customize display{/t}">
+  <img src="{$CustomDisplayImage}" alt="{t}Customize display{/t}"
+    onclick="fw.dom.toggleElement($('custom_display_layer'));new Draggable($('custom_display_layer'));" />
+</a>
+{/if}
+    </div>
+
+    <table width="100%" cellspacing="0" cellpadding="3" border="0">
+        <!-- Header du grid -->
+        <thead>
+{if $GridTotalRowCount > 20}
+        <tr>
+            <td colspan="{math equation="x + y + z + 1" x=$GridHeaderCount y=$NbSubColumn z=$GridHeaderGroupItemsCount}">
+              <div class="grid_actions_container">
+{if $DisplayCancelFilter eq true}
+                <span class="grid_filter_button">
+                    <a href="{$dropfiltertarget}"
+                    onmouseover="window.status='{t}Reset sorting{/t}'; return true;"
+                    title="{t}Reset sorting{/t}"><img src="{$CancelFilterImage}"
+                    alt="{t}Reset sorting{/t}" /></a>
+                </span>
+{/if}
+{if $Pager eq true and $PageTotal > 1}
+                <span class="grid_pager">{$paging}</span>
+{/if}
+                <span class="grid_actions">
+{section name=Action loop=$Actions}
+                    &nbsp;{$Actions[Action]}
+{/section}
+                &nbsp;&nbsp;
+                </span>
+              </div>
+            </td>
+        </tr>
+{/if}
+        <tr>
+{section name=GridHeader loop=$GridHeader}
+{if $GridHeader[GridHeader].GroupCount > 0}
+            <td class="group" colspan="{$GridHeader[GridHeader].GroupCount}">
+                {$GridHeader[GridHeader].GroupCaption|default:'&nbsp;'}
+            </td>
+{else}
+            <td {if $RowSpan} rowspan="2"{/if} class="grid_{$GridHeader[GridHeader].DataType}">
+{if $GridHeader[GridHeader].Link}
+{if $GridHeader[GridHeader].SortOrder eq 'DESC'}
+                <a href="javascript:void(0);" onclick="{$GridHeader[GridHeader].Link}"
+                onmouseover="window.status='{t}Sort descending{/t}';return true;"
+                title="{t}Sort descending{/t}">{$GridHeader[GridHeader].Caption|default:'&nbsp;'}</a>
+                <img src="{$SortAscImage}" />
+{elseif $GridHeader[GridHeader].SortOrder eq 'ASC'}
+                <a href="javascript:void(0);" onclick="{$GridHeader[GridHeader].Link}"
+                onmouseover="window.status='{t}Sort ascending{/t}'; return true;"
+                title="{t}Sort ascending{/t}">{$GridHeader[GridHeader].Caption|default:'&nbsp;'}</a>
+                <img src="{$SortDescImage}" />
+{else}
+                <a href="javascript:void(0);" onclick="{$GridHeader[GridHeader].Link}"
+                onmouseover="window.status='{t}Sort ascending{/t}'; return true;"
+                title="{t}Sort ascending{/t}">{$GridHeader[GridHeader].Caption|default:'&nbsp;'}</a>
+{/if}
+{else}
+                {$GridHeader[GridHeader].Caption|default:'&nbsp;'}
+{/if}
+            </td>
+{/if}
+{/section}
+{if $WithCheckBox eq 1 and count($GridRow) neq 0}
+            <td class="grid_checkbox_column"{if $RowSpan} rowspan="2"{/if}>
+                <input type="checkbox" name="gridItems_AllState"
+                onclick="fw.grid.changeCheckedStateOfAllItems(this);" />
+            </td>
+{else}
+            <td>&nbsp;</td>
+{/if}
+        </tr>
+{if $GridHeaderGroupsCount}
+        <tr>
+{foreach name=outer item=GridHeaderGroup from=$GridHeaderGroups}
+            <td class="group_item">
+{if $GridHeaderGroup.Link}
+{if $GridHeaderGroup.SortOrder == "ASC"}
+                <a href="javascript:void(0);" onclick="{$GridHeaderGroup.Link}"
+                onmouseover="window.status='{t}Sort ascending{/t}'; return true;"
+                title="{t}Sort ascending{/t}">{$GridHeaderGroup.Caption|default:'&nbsp;'}</a>
+                <img src="{$SortDescImage}" />
+{else}
+                <a href="javascript:void(0);" onclick="{$GridHeaderGroup.Link}"
+                onmouseover="window.status='{t}Sort descending{/t}'; return true;"
+                title="{t}Sort descending{/t}">{$GridHeaderGroup.Caption|default:'&nbsp;'}</a>
+                <img src="{$SortAscImage}" />
+{/if}
+{else}
+                {$GridHeaderGroup.Caption|default:'&nbsp;'}
+{/if}
+            </td>
+{/foreach}
+        </tr>
+{/if}
+        </thead>
+
+        <!-- Footer du grid -->
+        <tfoot>
+        <tr>
+            <td colspan="{math equation="x + y + z + 1" x=$GridHeaderCount y=$NbSubColumn z=$GridHeaderGroupItemsCount}">
+              <div class="grid_actions_container">
+{if $DisplayCancelFilter eq true}
+                <span class="grid_filter_button">
+                    <a href="{$dropfiltertarget}"
+                    onmouseover="window.status='{t}Reset sorting{/t}'; return true;"
+                    title="{t}Reset sorting{/t}">
+                    <img src="{$CancelFilterImage}" alt="{t}Reset sorting{/t}" /></a>
+                </span>
+{/if}
+{if $Pager eq true and $PageTotal gt 1}
+                <span class="grid_pager">{$paging}</span>
+{/if}
+                <span class="grid_actions">
+{section name=Action loop=$Actions}
+                    &nbsp;{$Actions[Action]}
+{/section}
+{if $firstGridInPage eq 1 || $withMultipleGridsInForm == false}
+                    <input type="hidden" name="toRemove" />
+                    <input type="hidden" name="actionId" value="-1" />
+                    <input type="hidden" id="PageIndex" name="PageIndex" value="{$CurrentPageIndex}" />&nbsp;&nbsp;
+{/if}
+                </span>
+              </div>
+            </td>
+        </tr>
+        </tfoot>
+
+        <!-- Contenu du grid -->
+        <tbody id="table_tbody">
+{section name=GridContent loop=$GridRow}
+{if $smarty.section.GridContent.index is odd}
+{if $GridHighlightedRows[$smarty.section.GridContent.index] eq 1}
+        <tr id="_{$GridObjectIds[GridContent]}" class="grid_row_highlighted_odd{if $GridObjectIdsChecked[GridContent] neq ''} hover{/if}{if $GridDndSortable} grid_dnd_sortable{/if}">
+{else}
+        <tr id="_{$GridObjectIds[GridContent]}" class="grid_row_odd{if $GridObjectIdsChecked[GridContent] neq ''} hover{/if}{if $GridDndSortable} grid_dnd_sortable{/if}">
+{/if}
+{else}
+{if $GridHighlightedRows[$smarty.section.GridContent.index] eq 1}
+        <tr id="_{$GridObjectIds[GridContent]}" class="grid_row_highlighted_even{if $GridObjectIdsChecked[GridContent] neq ''} hover{/if}{if $GridDndSortable} grid_dnd_sortable{/if}">
+{else}
+        <tr id="_{$GridObjectIds[GridContent]}" class="grid_row_even{if $GridObjectIdsChecked[GridContent] neq ''} hover{/if}{if $GridDndSortable} grid_dnd_sortable{/if}">
+{/if}
+{/if}
+{section name=GridCol loop=$GridRow[GridContent]}
+          <td class="grid_{$GridHeader[GridCol].DataType|default:'alphanumeric'}">{$GridRow[GridContent][GridCol]}</td>
+{/section}
+          <td class="grid_checkbox_column">
+{if $WithCheckBox eq 1}
+            <input type="checkbox" name="gridItems[]" value="{$GridObjectIds[GridContent]}"
+            {$GridObjectIdsChecked[GridContent]}
+            onclick="fw.grid.handleCBDeselect(this);" />
+{else}
+            &nbsp;
+{/if}
+          </td>
+{if count($RowActions) neq 0}
+         <td align="right">{$RowActions[GridContent]}</td>
+{/if}
+        </tr>
+{sectionelse}
+        <tr>
+            <td colspan="{math equation="x + y + z + 1" x=$smarty.section.GridHeader.total y=$NbSubColumn z=$GridHeaderGroupItemsCount}">
+                <span>{t}No record found{/t}</span>
+            </td>
+        </tr>
+{/section}
+        </tbody>
+    </table>
+</div>
+<div id="custom_display_layer">
+  <div id="custom_display_header_layer" style="background-image:url('{$CustomDisplayBarImage}')">
+    <img id="custom_display_close_button" src="images/help_close.gif" alt="{t}Close{/t}"
+          title="{t}Close{/t}" onclick="fw.dom.toggleElement($('custom_display_layer'));" />
+  </div>
+  <div id="custom_display_content">
+    {if $customizationEnabled}
+        </form> <!-- form du grid et/ou Searchform  -->
+        <form {$form.attributes}>
+        {$form.hidden}
+        <h2>{t}Customize display{/t}</h2>
+        {$form.customDisplayHiddenColumns.html}
+        <strong>{$form.customDisplayItemPerPage.label}:</strong> {$form.customDisplayItemPerPage.html}
+        <br /><br />
+        <div align="right" style="background-color:#E0E0E0;padding: 5px;">
+        {$form.customDisplaySubmit.html}&nbsp;&nbsp;{$form.customDisplaySetDefault.html}
+        &nbsp;&nbsp;{$form.customDisplayCancel.html}
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    {/if}
+  </div>
+</div>
+<!-- Fin grid -->

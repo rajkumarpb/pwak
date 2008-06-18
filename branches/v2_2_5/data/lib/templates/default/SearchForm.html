@@ -1,0 +1,126 @@
+<div id="custom_search_layer" style="z-index: 1;">
+  <div id="custom_search_header_layer" style="background-image:url('{$CustomDisplayBarImage}')">
+    <img id="custom_search_close_button" src="images/help_close.gif" alt="{t}Close{/t}"
+          title="{t}Close{/t}" onclick="fw.dom.toggleElement($('custom_search_layer'));" />
+  </div>
+  <div id="custom_search_content">
+    {if $customizationEnabled}
+      <form {$customSearchForm.attributes}>
+        {$customSearchForm.hidden}
+        <h2>{t}Customize search criteria{/t}</h2>
+        {$customSearchForm.customSearchHiddenCriteria.html}
+        <br /><br />
+        <div align="right" style="background-color:#E0E0E0;padding: 5px;">
+          {$customSearchForm.customSearchSubmit.html}&nbsp;&nbsp;{$customSearchForm.customSearchSetDefault.html}
+          &nbsp;&nbsp;{$customSearchForm.customSearchCancel.html}
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+      </form> <!-- form du customSearch uniquement  -->
+    {/if}
+  </div>
+</div>
+
+{$form.javascript}
+<form {$form.attributes}>
+<p class="css_disabled">
+{$form.hidden}
+{foreach key=key item=item from=$AdditionalSmartyValues}
+    {$item}
+{/foreach}
+</p>
+<script type="text/javascript">
+<!--
+// <![CDATA[
+
+function initForm(){ldelim}
+    $('{$FormName}').target = '_self';
+    $('{$FormName}').method = 'post';
+    if ($('{$FormName}').elements['actionId']) {ldelim}
+        $('{$FormName}').elements['actionId'].value = -1;
+    {rdelim}
+{rdelim}
+
+function submitSearchForm(e){ldelim}
+    initForm();
+    if (e.key().code == 13) $('{$FormName}').submit();
+{rdelim}
+
+connect(window, 'onkeyup', submitSearchForm);
+// ]]>
+-->
+</script>
+<div id="searchform_container">
+    <div id="searchform_header" class="generic_form">
+        <table width="100%" border="0" cellspacing="0" cellpadding="4" id="searchFormHead">
+            <thead>
+            <tr>
+                <td colspan="3">
+                  {t}Search criteria{/t}&nbsp;
+                  {if $customizationEnabled}
+                    <a href="javascript:void(0);" title="{t}Customize{/t}">
+                      <img src="{$CustomDisplayImage}" alt="{t}Customize{/t}"
+                        onclick="fw.dom.toggleElement($('custom_search_layer'));new Draggable($('custom_search_layer'));" />
+                    </a>
+                  {/if}
+                </td>
+                <td>
+                    <input type="button"
+                      id="searchform_switch"
+                      onclick="fw.dom.toggleElement('searchform_fields', null, 'searchform_switch');"
+                      title="{t}Show/Hide{/t}"
+                      value="{if $DisplayForm != 'none'}-{else}+{/if}"
+                    />
+                </td>
+            </tr>
+            </thead>
+            <tfoot class="css_disabled"><tr><td colspan="4"/></tr></tfoot>
+            <tbody class="css_disabled"><tr><td colspan="4"/></tr></tbody>
+        </table>
+    </div>
+    <div id="searchform_fields" class="generic_form" style="display:{$DisplayForm|default:block}">
+        <table width="100%" border="0" cellspacing="0" cellpadding="4" id="searchForm">
+            <thead class="css_disabled"><tr><td colspan="4"/></tr></thead>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <input type="submit" class="button" name="SearchButton"
+                    id="searchbutton" value="{t}Search{/t}" onclick="javascript:initForm();"/>&nbsp;
+{if $withResetButton}
+                    <input type="button" class="button" name="ResetButton"
+                    id="searchresetbutton" value="{t}New search{/t}" onclick="javascript:{$reset}"/>
+{/if}
+                    {$actions}
+                </td>
+            </tr>
+            </tfoot>
+
+            <tbody>
+{section name=item loop=$FormElements}
+{if $smarty.section.item.index mod 4 eq 0}
+            <tr>
+                <td class="element_label">
+                    {eval var=$FormElements[item]}
+                </td>
+{elseif $smarty.section.item.index mod 4 eq 3}
+               <td class="element_html">
+                    {eval var=$FormElements[item]}
+                </td>
+            </tr>
+{elseif $smarty.section.item.index mod 4 eq 1}
+                <td class="element_html">
+                    {eval var=$FormElements[item]}
+                </td>
+{else}
+                <td class="element_label">
+                    {eval var=$FormElements[item]}
+                </td>
+{/if}
+{/section}
+{if $ExtraTD}
+                {$ExtraTD}
+            </tr>
+{/if}
+            </tbody>
+        </table>
+    </div>
+</div>

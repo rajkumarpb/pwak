@@ -1,0 +1,16 @@
+<div id="dialog">
+    <span id="dialog_title">&nbsp;{$Title}</span>
+    <span id="dialog_image"><img src="{$ImageSource}" alt="" title=""/></span>
+    <span id="dialog_message">&nbsp;{$Message}</span>
+    <span id="dialog_buttons">
+{if $Button1}
+        <input type="button" id="okDialogButton" value="{$Button1.label}" onclick="window.location='{$Button1.link}'" />
+{/if}
+{if $Button2}
+        <input type="button" value="{$Button2.label}" onclick="window.location='{$Button2.link}'" />
+{/if}
+{if $Button3}
+        <input type="button" value="{$Button3.label}" onclick="window.location='{$Button3.link}'" />
+{/if}
+</span>
+</div>

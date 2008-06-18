@@ -1,0 +1,54 @@
+# $Id: project.conf,v 1.1 2007-06-07 12:05:27 david Exp $
+
+# database Data Source Name (DSN)
+DB_DSN=mysqlt://user:passwd@localhost/dbname
+
+# path to the framework root
+FRAMEWORK_ROOT=/path/to/framework
+
+# Boolean that determine if the application is in testing mode (1) or in
+# production mode (0)
+# DEV_VERSION=1
+
+# directory relative to the project root containing files accessible by the
+# webserver
+# WWW_DIR=www
+
+# directory relative to the WWW_DIR containing css files
+# CSS_DIR=css
+
+# directory relative to the WWW_DIR containing image files
+# IMG_DIR=images
+
+# directory relative to the WWW_DIR containing js files
+# JS_DIR=js
+
+# directory relative to the project root XXX
+# LIB_DIR=lib
+
+# directory relative to the project root containing helper functions
+# FUNCTION_DIR=functions
+
+# Main template
+# BASE_TEMPLATE=Base.html
+
+# Main popup template
+# BASE_POPUP_TEMPLATE=Base.html
+
+# Main popup template
+# BASE_DIALOG_TEMPLATE=Dialog.html
+
+# developper(s) email address
+# MAIL_DEV=dev@yourdomain.com 
+
+# from address for mails sent by application
+# MAIL_SENDER=you@yourdomain.com
+
+# determine if the application should be internationalized
+# I18N_ENABLED=1
+
+# menu's metadata format (either php or xml)
+# MENU_METADATA_FORMAT=xml
+
+# File containing menu metadata
+# MENU_METADATA=config/menu.xml
