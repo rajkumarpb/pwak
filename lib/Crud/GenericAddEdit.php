@@ -438,8 +438,8 @@ class GenericAddEdit extends GenericController {
                     if (isset($_FILES[$eltname]['name']) && !empty($_FILES[$eltname]['name'])) {
                         try {
                             $manager = new ImageManager($eltname);
-                            $img = $manager->dbstore();
-                            $this->object->$setter($img);
+                            $manager->dbstore();
+                            $this->object->$setter($_FILES[$eltname]['name']);
                         } catch (Exception $exc) {
                             Template::errorDialog($exc->getMessage(), $this->guessReturnURL());
                             exit;
