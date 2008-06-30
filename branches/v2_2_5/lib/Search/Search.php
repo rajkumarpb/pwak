@@ -701,8 +701,8 @@ class SearchTools {
         foreach($parts as $key => $attributeName) {
             $pos = strpos($attributeName, "()");
             require_once(MODELS_DIR . '/' . $currentEntity.'.php');
+            $inherits = explode('@', $attributeName);  // strpos($attributeName, "@")
             if ($pos === false) { // attribut de type FK
-                $inherits = explode('@', $attributeName);  // strpos($attributeName, "@")
                 $attributeName = $inherits[0];
                 $rightTable = Registry::getPropertyTableName($currentEntity, $attributeName);
                 $tableArray[] = $rightTable . ' T' . strval($key+1);
@@ -715,10 +715,15 @@ class SearchTools {
                 $join[] = ' T' . strval($key+1) . '._Id = T' . strval($key) . '._' . $attributeName;
             }
             else {  // attribut de type collection
+                $attributeName = $inherits[0];
                 $attributeName = substr($attributeName, 0, strlen($attributeName) - 2);  // suppression des ()
                 $links = call_user_func(array($currentEntity, 'getLinks'));
                 $attributeForJoin = $links[$attributeName]['field'];
-                $currentEntity = $links[$attributeName]['linkClass'];
+                if (count($inherits) == 1) {
+                    $currentEntity = $links[$attributeName]['linkClass'];
+                } else {
+                    $currentEntity = $inherits[1];
+                }
                 require_once(MODELS_DIR . '/' . $currentEntity.'.php');
                 $rightTable = call_user_func(array($currentEntity, 'getTableName'));
                 $tableArray[] = $rightTable . ' T' . strval($key+1);
