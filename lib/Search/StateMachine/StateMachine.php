@@ -167,6 +167,9 @@ class StateMachine {
         $token = array_pop($tokens);
         $curState = $this->_startState;
         foreach($tokens as $tok) {
+            if (strpos($tok, '@') !== false) {
+                list($tok,) = explode('@', $tok);
+            }
             $curState = $curState->transitions[$tok];
         }
         if(!$forSelectClause && isset($curState->transitions[$token])) {
@@ -200,8 +203,12 @@ class StateMachine {
             if (is_array($macroTokens) && (count($macroTokens) > 1)) {
                 $curPath = '';
                 foreach($macroTokens as $macroToken) {
+                    if (strpos($macroToken, '@') !== false) {
+                        list($macroToken, $curEntity) = explode('@', $macroToken);
+                    } else {
+                        $curEntity = Registry::getPropertyClassname($curEntity, $macroToken);
+                    }
                     $curPath .= '.' . $macroToken;
-                    $curEntity = Registry::getPropertyClassname($curEntity, $macroToken);
                     if (isset($pathNodes[$curPath])) {
                         $nextState = $pathNodes[$curPath];
                     } else {
