@@ -497,9 +497,13 @@ class SearchTools {
         $ValuesArray = array();
         $mapper = Mapper::singleton($Entity);
         if ($toString!='toString' && $toString != 'toStringLite') {
-            $fields = array($toString);
-        }
-        else {
+            if (property_exists($Entity, '_' . $toString)) {
+                $fields = array($toString);
+            } else {
+                // methode addon
+                $fields = array();
+            }
+        } else {
             $toStringAttribute = Tools::getToStringAttribute($Entity);
             $fields = is_array($toStringAttribute)?
                     $toStringAttribute:array($toStringAttribute);

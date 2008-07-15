@@ -331,8 +331,10 @@ class GenericGrid extends GenericController {
 
             $customMethod = 'renderColumn' . $property;
             if (method_exists($this, $customMethod)) {
-                $this->$customMethod();
-                continue;
+                $ret = $this->$customMethod();
+                if ($ret !== false) {
+                    continue;
+                }
             }
 
             $columnType = $this->_getColumnType($property);
@@ -381,8 +383,10 @@ class GenericGrid extends GenericController {
 
             $customMethod = 'renderSearchForm' . $property;
             if (method_exists($this, $customMethod)) {
-                $this->$customMethod();
-                continue;
+                $ret = $this->$customMethod();
+                if ($ret !== false) {
+                    continue;
+                }
             }
 
             $elmType = $this->_getSearchFormType($property);
