@@ -470,6 +470,64 @@ class I18N
             'extract_replacement' => array('', '.')
         ),
         // }}}
+        // es_ES {{{
+        'es_ES' => array(
+            'name'            => 'Español',
+            'code'            => 'es_ES',
+            'shortcode'       => 'es',
+            'encoding'        => 'ISO-8859-15',
+            'currency_format' => '%s {$CURRENCY}',
+            'percent_format'  => '%s %%',
+            'thousand_sep'    => '.',
+            'decimal_sep'     => ',',
+            'date_format'     => array(
+                I18N::TIME_SHORT             => '%H:%M',
+                I18N::TIME_LONG              => '%H:%M:%S',
+                I18N::DATE_SHORT             => '%y/%m/%d',
+                I18N::DATE_LONG              => '%Y/%m/%d',
+                I18N::DATE_SHORT_TEXTUAL     => '%a %d %b %Y',
+                I18N::DATE_LONG_TEXTUAL      => '%A %d %B %Y',
+                I18N::DATETIME_SHORT         => '%y/%m/%d %H:%M',
+                I18N::DATETIME_LONG          => '%Y/%m/%d %H:%M',
+                I18N::DATETIME_FULL          => '%Y/%m/%d %H:%M:%S',
+                I18N::DATETIME_SHORT_TEXTUAL => '%a %d %b %Y %H:%M',
+                I18N::DATETIME_LONG_TEXTUAL  => '%A %d %B %Y %H:%M',
+                I18N::DATETIME_FULL_TEXTUAL  => '%A %d %B %Y %H:%M:%S'
+            ),
+            'days' => array(
+                array('Domingo', 'Dom'),
+                array('Lunes', 'Lun'),
+                array('Martes', 'Mar'),
+                array('Miércoles', 'Miér'),
+                array('Jueves', 'Jue'), 
+                array('Viernes', 'Vie'),
+                array('Sábado', 'Sáb')
+            ),
+            'monthes' => array(
+                array('Enero', 'Ene'),
+                array('Febrero', 'Feb'),
+                array('Marzo', 'Mar'),
+                array('Abril', 'Abr'),
+                array('Mayo', 'May'), 
+                array('Junio', 'Jun'),
+                array('Julio', 'Jul'),
+                array('Agosto', 'Ago'),
+                array('Septiembre', 'Sep'),
+                array('Octubre', 'Oct'),
+                array('Noviembre', 'Nov'),
+                array('Diciembre', 'Dic')
+            ),
+            'html_select_date_format' => 'dmY',
+            'duration_format' => array(
+                'day'    => '%s ds',
+                'hour'   => '%s hs',
+                'minute' => '%s mn'
+            ),
+            // en espagnol on écrit: 100.000,45
+            'extract_pattern' => array('.', ','),
+            'extract_replacement' => array('', '.')
+        ),
+        // }}}
     );
 
     /**
