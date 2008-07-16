@@ -523,7 +523,7 @@ class I18N
                 'hour'   => '%s hs',
                 'minute' => '%s mn'
             ),
-            // en français on écrit: 100 000,45
+            // en espagnol on écrit: 100.000,45
             'extract_pattern' => array('.', ','),
             'extract_replacement' => array('', '.')
         ),
