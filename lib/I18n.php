@@ -478,18 +478,18 @@ class I18N
             'encoding'        => 'ISO-8859-15',
             'currency_format' => '%s {$CURRENCY}',
             'percent_format'  => '%s %%',
-            'thousand_sep'    => ' ',
+            'thousand_sep'    => '.',
             'decimal_sep'     => ',',
             'date_format'     => array(
                 I18N::TIME_SHORT             => '%H:%M',
                 I18N::TIME_LONG              => '%H:%M:%S',
-                I18N::DATE_SHORT             => '%d/%m/%y',
-                I18N::DATE_LONG              => '%d/%m/%Y',
+                I18N::DATE_SHORT             => '%y/%m/%d',
+                I18N::DATE_LONG              => '%Y/%m/%d',
                 I18N::DATE_SHORT_TEXTUAL     => '%a %d %b %Y',
                 I18N::DATE_LONG_TEXTUAL      => '%A %d %B %Y',
-                I18N::DATETIME_SHORT         => '%d/%m/%y %H:%M',
-                I18N::DATETIME_LONG          => '%d/%m/%Y %H:%M',
-                I18N::DATETIME_FULL          => '%d/%m/%Y %H:%M:%S',
+                I18N::DATETIME_SHORT         => '%y/%m/%d %H:%M',
+                I18N::DATETIME_LONG          => '%Y/%m/%d %H:%M',
+                I18N::DATETIME_FULL          => '%Y/%m/%d %H:%M:%S',
                 I18N::DATETIME_SHORT_TEXTUAL => '%a %d %b %Y %H:%M',
                 I18N::DATETIME_LONG_TEXTUAL  => '%A %d %B %Y %H:%M',
                 I18N::DATETIME_FULL_TEXTUAL  => '%A %d %B %Y %H:%M:%S'
@@ -498,33 +498,33 @@ class I18N
                 array('Domingo', 'Dom'),
                 array('Lunes', 'Lun'),
                 array('Martes', 'Mar'),
-                array('Miércoles', 'Mier'),
+                array('Miércoles', 'Miér'),
                 array('Jueves', 'Jue'), 
                 array('Viernes', 'Vie'),
-                array('Sabado', 'Sab')
+                array('Sábado', 'Sáb')
             ),
             'monthes' => array(
                 array('Enero', 'Ene'),
                 array('Febrero', 'Feb'),
                 array('Marzo', 'Mar'),
                 array('Abril', 'Abr'),
-                array('Mayo', 'Mayo'), 
+                array('Mayo', 'May'), 
                 array('Junio', 'Jun'),
                 array('Julio', 'Jul'),
                 array('Agosto', 'Ago'),
                 array('Septiembre', 'Sep'),
                 array('Octubre', 'Oct'),
-                array('Nobiembre', 'Nob'),
+                array('Noviembre', 'Nov'),
                 array('Diciembre', 'Dic')
             ),
             'html_select_date_format' => 'dmY',
             'duration_format' => array(
-                'day'    => '%s d.',
-                'hour'   => '%s h.',
-                'minute' => '%s min.'
+                'day'    => '%s ds',
+                'hour'   => '%s hs',
+                'minute' => '%s mn'
             ),
             // en français on écrit: 100 000,45
-            'extract_pattern' => array(' ', ','),
+            'extract_pattern' => array('.', ','),
             'extract_replacement' => array('', '.')
         ),
         // }}}
