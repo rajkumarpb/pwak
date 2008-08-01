@@ -379,7 +379,7 @@ class GenericAddEdit extends GenericController {
         if (!$this->innerForm) {
             Database::connection()->startTrans();
         }
-        $this->onBeforeHandlePostData();
+        $this->onBeforeHandlePostData($values);
         if ($this->object->getId() == 0) {
             $this->object->generateId();
             $this->objID = $this->object->getId();
