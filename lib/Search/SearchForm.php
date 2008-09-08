@@ -135,9 +135,9 @@ class SearchForm {
      * type d'entite cherchee: correspond a l'entity du Mapper du Grid
      * resultat de la recherche
      *
-     * @access private
+     * @access public
      */
-    private $_entitySearched = true;
+    public $entity = true;
 
     /**
      * Booleen: aficher ou pas le bouton reset
@@ -192,7 +192,7 @@ class SearchForm {
         $smarty = new Template();
         $this->_smarty = $smarty;
         $this->_name = ($path[0] == 'dispatcher') ? $_REQUEST['entity'] : $path[0];
-        $this->_entitySearched = $entitySearched;
+        $this->entity = $entitySearched;
     }
 
     // }}}
@@ -350,7 +350,7 @@ class SearchForm {
             $attributes[1] = (isset($attributes[1]))?$attributes[1] . $id:$id;
         }
         if ((isset($searchOptions['Path']) && !(false === strpos($searchOptions['Path'], '()')))
-            && $this->_entitySearched == '') {
+            && $this->entity == '') {
             // INUTILE DE TRADUIRE !!!
             trigger_error('You have to define EntitySearched in constructor call.',
                            E_USER_ERROR);
@@ -639,7 +639,7 @@ class SearchForm {
 
         $begin['Path'] = (!isset($begin['Path']))?$begin['Name']:$begin['Path'];
         $end['Path'] = (!isset($end['Path']))?$end['Name']:$end['Path'];
-        $attrs = call_user_func(array($this->_entitySearched, 'getProperties'));
+        $attrs = call_user_func(array($this->entity, 'getProperties'));
 
         if ($begin['Disable'] == false) {
             $type = isset($attrs[$begin['Path']]) ? $attrs[$begin['Path']] : Object::TYPE_DATETIME;
@@ -650,7 +650,7 @@ class SearchForm {
             $FilterComponentArray[] = SearchTools::NewFilterComponent(
                 'BDate', $begin['Path'],
                 'GreaterThanOrEquals', $value, 1,
-                $this->_entitySearched);
+                $this->entity);
         }
         if ($end['Disable'] == false) {
             $type = isset($attrs[$end['Path']]) ? $attrs[$end['Path']] : Object::TYPE_DATETIME;
@@ -660,7 +660,7 @@ class SearchForm {
             $value .= $type==Object::TYPE_DATETIME ? ' 23:59:59' : '';
             $FilterComponentArray[] = SearchTools::NewFilterComponent(
                 'EDate', $end['Path'], 'LowerThanOrEquals', $value,
-                1, $this->_entitySearched);
+                1, $this->entity);
         }
         return $FilterComponentArray;
     }
@@ -757,7 +757,7 @@ class SearchForm {
                             $elements[$i]['Operator'],
                             $elements[$i]['Value'],
                             0,
-                            $this->_entitySearched
+                            $this->entity
                     );
                 }
                 if (!$FilterComponent) {
@@ -1169,7 +1169,7 @@ class SearchForm {
     {
         // Si on ne passe pas une Collection directemt au Grid::render()
         if ($this->getItemsCollection() === false) {
-            $mapper = Mapper::singleton($this->_entitySearched);
+            $mapper = Mapper::singleton($this->entity);
             $grid->setMapper($mapper);
         }
 
