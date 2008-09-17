@@ -61,8 +61,10 @@ class GridActionExport extends GridActionJS {
         $url = $this->returnURL?$url.'returnURL='.$this->returnURL.'&amp;':$url;
         // Pour les GenericGrid
         $url .= (isset($_REQUEST['entity']) && stripos($url, 'entity=') === false)?
-                'entity=' . $_REQUEST['entity'] . '&amp;':'';
-        $url .= 'export=' . $fileName;
+                'entity=' . $_REQUEST['entity'] . '&amp;' : '';
+        $url .= (isset($_REQUEST['altname']) && stripos($url, 'altname=') === false)?
+                'altname=' . $_REQUEST['altname'] . '&amp;' : '';
+        $url .= stripos($url, 'export=') === false ? 'export=' . $fileName : '';
         $url = UrlTools::compliantURL($url);
 
         $params['jsActionArray'] = array('window.location=\'' . $url  . '\'');
