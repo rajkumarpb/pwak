@@ -29,7 +29,6 @@
 
 define('AJAX_MODE_GET',  0);
 define('AJAX_MODE_POST', 1);
-// }}}
 
 /**
  * Serveur AJAX/JSON

@@ -141,6 +141,19 @@ class Object {
     }
 
     // }}}
+    // Object::getClassName() {{{
+
+    /**
+     * Retourne le nom de la classe de l'instance en cours.
+     *
+     * @access public
+     * @return string
+     */
+    public function getClassName() {
+        return get_class($this);
+    }
+
+    // }}}
     // Object::getParentClassName() {{{
 
     /**
