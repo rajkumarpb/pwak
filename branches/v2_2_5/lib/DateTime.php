@@ -402,22 +402,24 @@ class DateTimeTools {
      * "2004-02-16 11:52:56" retourne "2004-02-29 11:52:56"
      *
      * @static
-     * @param sting $date date MySQL Y-m-d H:i:s
+     * @param string $date   date MySQL Y-m-d H:i:s
+     * @param int    $offset decalage en mois (par defaut 0)
      * @return string
      */
-    static function lastDayInMonth($date) {
+    static function lastDayInMonth($date, $offset=0) {
         $date = explode(" ", $date);
         $dateArray = explode("-", $date[0]);
-
-        $Month31 = Array("01", "03", "05", "07", "08", "10", "12");
-        $Month30 = Array("04", "06", "09", "11");
-
-        if (in_array($dateArray[1], $Month31) ) {
-            return ($dateArray[0]."-".$dateArray[1]."-"."31"." ".$date[1]);
+        if ($offset) {
+            $dateArray[1] = sprintf('%02d', (int)$dateArray[1] + $offset);
         }
-        elseif(in_array($dateArray[1], $Month30) ) {
+        $month31 = Array("01", "03", "05", "07", "08", "10", "12");
+        $month30 = Array("04", "06", "09", "11");
+        if (in_array($dateArray[1], $month31)) {
+            return ($dateArray[0]."-".$dateArray[1]."-"."31"." ".$date[1]);
+        } else if (in_array($dateArray[1], $month30)) {
             return ($dateArray[0]."-".$dateArray[1]."-"."30"." ".$date[1]);
-        } else { //le cas de fevrier
+        } else {
+            // le cas de fevrier
             if (checkdate($dateArray[1], 29, $dateArray[0])) {
                 return ($dateArray[0]."-".$dateArray[1]."-"."29"." ".$date[1]);
             }
