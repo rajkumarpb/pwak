@@ -202,6 +202,14 @@ class GenericGrid extends GenericController {
      */
     public $forceGridDisplay = false;
 
+    /**
+     * preserveGridItems
+     *
+     * @var bool
+     * @access public
+     */
+    public $preserveGridItems = false;
+
     // }}}
     // Constructeur {{{
 
@@ -291,7 +299,8 @@ class GenericGrid extends GenericController {
                 // mettre 1 pour préserver les checkbox coché ici empêche de 
                 // décoché des checkbox lors que l'on fait plusieurs rechreche 
                 // à la suite
-                $filter = array_merge($filter, $this->searchForm->BuildFilterComponentArray());
+                $filter = array_merge($filter, $this->searchForm->BuildFilterComponentArray(
+                    $this->preserveGridItems));
                 $filter = SearchTools::FilterAssembler($filter);
 
                 $this->buildGrid();
