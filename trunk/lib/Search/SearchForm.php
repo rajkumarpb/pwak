@@ -1170,7 +1170,9 @@ class SearchForm {
         // Si on ne passe pas une Collection directemt au Grid::render()
         if ($this->getItemsCollection() === false) {
             $mapper = Mapper::singleton($this->entity);
-            $grid->setMapper($mapper);
+            if (!($grid->getMapper() instanceof Mapper)) {
+                $grid->setMapper($mapper);
+            }
         }
 
         if ($grid->isPendingAction()) {
