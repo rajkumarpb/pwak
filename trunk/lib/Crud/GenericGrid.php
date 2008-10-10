@@ -181,7 +181,7 @@ class GenericGrid extends GenericController {
      * @var array
      * @access public
      */
-    public $addionalContent = array();
+    public $additionalContent = array();
 
     /**
      * true si le grid à une action "Editer" à la place d'un lien vers le
@@ -298,10 +298,18 @@ class GenericGrid extends GenericController {
                 $order = $this->getGridSortOrder();
                 $this->searchForm->displayResult($this->grid, true, $filter,
                     $order, $title, $this->jsRequirements,
-                    $this->addionalContent, 'page');
+                    $this->additionalContent, 'page');
             } else {
-                Template::page($title, $this->searchForm->Render() . '</form>',
-                    $this->jsRequirements, $this->cssRequirements, $template);
+                $content = '';
+                if (isset($this->additionalContent['beforeForm'])) {
+                    $content = $this->additionalContent['beforeForm'];
+                }
+                $content .= $this->searchForm->render() . '</form>';
+                if (isset($this->additionalContent['between'])) {
+                    $content = $this->additionalContent['between'];
+                }
+                Template::page($title, $content, $this->jsRequirements,
+                    $this->cssRequirements, $template);
             }
         } else {
             $this->buildGrid();
