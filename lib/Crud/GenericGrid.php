@@ -796,12 +796,14 @@ class GenericGrid extends GenericController {
             );
         }
         if($elmType == Object::TYPE_FKEY) {
-            $clsName = $this->attrs[$elmName];
-            $fGetter = 'getFilterFor'.$elmName;
-            $filter = method_exists($this, $fGetter) ? $this->$fGetter() : array();
+            $clsName  = $this->attrs[$elmName];
+            $fGetter  = 'getFilterFor' . $elmName;
+            $filter   = method_exists($this, $fGetter) ? $this->$fGetter() : array();
+            $tGetter  = 'getToStringAttributeFor' . $elmName;
+            $toString = method_exists($this, $tGetter) ? $this->$tGetter() : 'toString';
             return array(
                 SearchTools::CreateArrayIDFromCollection($clsName, $filter,
-                    MSG_SELECT_AN_ELEMENT)
+                    MSG_SELECT_AN_ELEMENT, $toString)
             );
         }
         if($elmType == Object::TYPE_BOOL) {
