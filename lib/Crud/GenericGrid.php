@@ -181,7 +181,7 @@ class GenericGrid extends GenericController {
      * @var array
      * @access public
      */
-    public $addionalContent = array();
+    public $additionalContent = array();
 
     /**
      * true si le grid à une action "Editer" à la place d'un lien vers le
@@ -201,6 +201,14 @@ class GenericGrid extends GenericController {
      * @access public
      */
     public $forceGridDisplay = false;
+
+    /**
+     * preserveGridItems
+     *
+     * @var bool
+     * @access public
+     */
+    public $preserveGridItems = false;
 
     // }}}
     // Constructeur {{{
@@ -291,17 +299,26 @@ class GenericGrid extends GenericController {
                 // mettre 1 pour préserver les checkbox coché ici empêche de 
                 // décoché des checkbox lors que l'on fait plusieurs rechreche 
                 // à la suite
-                $filter = array_merge($filter, $this->searchForm->BuildFilterComponentArray());
+                $filter = array_merge($filter, $this->searchForm->BuildFilterComponentArray(
+                    $this->preserveGridItems));
                 $filter = SearchTools::FilterAssembler($filter);
 
                 $this->buildGrid();
                 $order = $this->getGridSortOrder();
                 $this->searchForm->displayResult($this->grid, true, $filter,
                     $order, $title, $this->jsRequirements,
-                    $this->addionalContent, 'page');
+                    $this->additionalContent, 'page');
             } else {
-                Template::page($title, $this->searchForm->Render() . '</form>',
-                    $this->jsRequirements, $this->cssRequirements, $template);
+                $content = '';
+                if (isset($this->additionalContent['beforeForm'])) {
+                    $content = $this->additionalContent['beforeForm'];
+                }
+                $content .= $this->searchForm->render() . '</form>';
+                if (isset($this->additionalContent['between'])) {
+                    $content = $this->additionalContent['between'];
+                }
+                Template::page($title, $content, $this->jsRequirements,
+                    $this->cssRequirements, $template);
             }
         } else {
             $this->buildGrid();
