@@ -756,12 +756,12 @@ class Grid extends AbstractGrid {
                     if (count($array) > 0) {
                         for ($k=0;$k<count($array);$k++) {
                             $array[$k] = (strpos($array[$k],"\n\t\t\t") !== false)?substr(str_replace("\n\t\t\t", ", ", $array[$k]), 2):$array[$k];
-                            $elements[] = $this->_formatDataForExport($array[$k]);
+                            $elements[] = self::formatDataForExport($array[$k]);
                         }
                     }
                 }
                 else {
-                    $elements[] = $this->_formatDataForExport($DataArray[$i][$j]);
+                    $elements[] = self::formatDataForExport($DataArray[$i][$j]);
                 }
             }
             $s .= implode($sep, $elements).$NEWLINE;
@@ -783,7 +783,7 @@ class Grid extends AbstractGrid {
      * @param string
      * @return string
      **/
-    private function _formatDataForExport($data){
+    public static function formatDataForExport($data){
         $quote = '"';
         $escquote = '"';
         $replaceNewLine = ' ';
