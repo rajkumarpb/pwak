@@ -553,10 +553,10 @@ class SearchForm {
             $begin['Label'] = _('From');
         }
         if (!isset($begin['Format']['minYear'])) {
-            $begin['Format']['minYear'] = date('Y') - 1;
+            $begin['Format']['minYear'] = date('Y') - 5;
         }
         if (!isset($begin['Format']['maxYear'])) {
-            $begin['Format']['maxYear'] = date('Y') + 1;
+            $begin['Format']['maxYear'] = date('Y') + 5;
         }
         /////
         if (!isset($end['Format']['language'])) {
@@ -569,10 +569,10 @@ class SearchForm {
             $end['Label'] = _(' to ');
         }
         if (!isset($end['Format']['minYear'])) {
-            $end['Format']['minYear'] = date('Y') - 1;
+            $end['Format']['minYear'] = date('Y') - 5;
         }
         if (!isset($end['Format']['maxYear'])) {
-            $end['Format']['maxYear'] = date('Y') + 1;
+            $end['Format']['maxYear'] = date('Y') + 5;
         }
 
         $addInstruction = "\$this->_form->addElement('date', \$begin['Name'], \$begin['Label'], \$begin['Format']);";
