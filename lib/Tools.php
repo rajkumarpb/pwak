@@ -59,7 +59,7 @@ class Tools {
             // et puis l'environement d'utilisation
             $ev = defined('ENVIRONMENT') ? ENVIRONMENT :
                      (defined('DEV_VERSION') ? (DEV_VERSION ? 'dev' : 'prod') :
-                         'unknown'));
+                         'unknown');
             // le prefixe
             $logPrefix  = sprintf('[ONLOGISTICS ip=%s%s sc=%s env=%s]',
                 $ip, $userstr, $_SERVER['SCRIPT_NAME'], $ev);
