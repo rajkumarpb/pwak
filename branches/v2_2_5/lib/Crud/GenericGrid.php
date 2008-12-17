@@ -636,19 +636,23 @@ class GenericGrid extends GenericController {
     protected function getGridSortOrder() {
         $keys  = array_keys($this->mapping);
         $props = array_keys($this->attrs);
-
-        // Si la property associee de l'objet,
-        // correspondant a la 1ere colonne est de type FK
-        $propType = $this->attrs[$keys[0]];
+        if (!count($keys) || !count($props)) {
+            return array();
+        }
+        $i = 0;
+        while (!isset($this->attrs[$keys[$i]]) && count($keys) > $i) {
+            $i++;
+        }
+        if (!isset($this->attrs[$keys[$i]])) {
+            return array();
+        }
+        $propType = $this->attrs[$keys[$i]];
         if (!is_numeric($propType)) {
             $instance = new $propType();
             $toStringAttribute = $instance->getToStringAttribute();
-            $order = array($keys[0] . '.' . $toStringAttribute => SORT_ASC);
+            return array($keys[$i] . '.' . $toStringAttribute => SORT_ASC);
         }
-        else {
-            $order = array($keys[0] => SORT_ASC);
-        }
-        return (isset($keys[0]) && in_array($keys[0], $props))?$order:array();
+        return array($keys[$i] => SORT_ASC);
     }
 
     // }}}
