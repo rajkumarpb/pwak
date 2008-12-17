@@ -276,7 +276,7 @@ class Auth {
     }
 
     // }}}
-    // Auth::isPilot() {{{
+    // Auth::isAdmin() {{{
 
     /**
      * Retourne true si le profil de l'utilisateur connecté est ADMIN.
@@ -284,9 +284,13 @@ class Auth {
      * @access public
      * @return boolean
      */
-    public function isPilot() {
-        $pf  = $this->getUser()->getProfile();
-        return ($pf == PROFILE_ADMIN || $pf == PROFILE_AERO_ADMIN);
+    public function isAdmin() {
+        $pf = $this->getUser()->getProfile();
+        return (
+            $pf == UserAccount::PROFILE_ADMIN || 
+            $pf == UserAccount::PROFILE_ADMIN_WITHOUT_CASHFLOW ||
+            $pf == UserAccount::PROFILE_ROOT
+        );
     }
 
     // }}}
