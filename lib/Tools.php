@@ -56,9 +56,13 @@ class Tools {
                 $user = $auth->getIdentity() . '@' . $auth->getRealm();
                 $userstr = ' user=' . $user;
             }
+            // et puis l'environement d'utilisation
+            $ev = defined('ENVIRONMENT') ? ENVIRONMENT :
+                     (defined('DEV_VERSION') ? (DEV_VERSION ? 'dev' : 'prod') :
+                         'unknown');
             // le prefixe
-            $logPrefix  = sprintf('[ONLOGISTICS ip=%s%s sc=%s]',
-                $ip, $userstr, $_SERVER['SCRIPT_NAME']);
+            $logPrefix  = sprintf('[ONLOGISTICS ip=%s%s sc=%s env=%s]',
+                $ip, $userstr, $_SERVER['SCRIPT_NAME'], $ev);
             $_logger = Log::Singleton('syslog', LOG_LOCAL0 , $logPrefix);
         }
         return $_logger;

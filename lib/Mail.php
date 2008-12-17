@@ -93,6 +93,7 @@ class MailTools {
         // vrais destinataires, on l'envoi seulement à l'e-mail défini par la
         // constante MAIL_DEV
         if (DEV_VERSION) {
+            $orig_recipents = $recipients;
             $recipients = array(MAIL_DEV);
         }
         // construction des headers du mail
@@ -148,6 +149,9 @@ class MailTools {
         // on loggue les envois/echecs
         $logger = Tools::loggerFactory();
         $recs = implode(', ', $recipients);
+        if (isset($orig_recipents)) {
+            $recs .= sprintf(' (original to: %s)', implode(', ', $orig_recipents));
+        }
         if ($result) {
             $logger->log("Mail sent: $recs", PEAR_LOG_NOTICE);
         } else {
