@@ -1,4 +1,4 @@
--- $CVSHeader: framework/vendor/adodb/session/adodb-sessions.oracle.clob.sql,v 1.1.1.1 2007-06-06 11:14:48 david Exp $
+-- $CVSHeader$
 
 DROP TABLE adodb_sessions;
 

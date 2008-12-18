@@ -1,6 +1,6 @@
 <?php
 /*
-V4.94 23 Jan 2007  (c) 2000-2007 John Lim (jlim#natsoft.com.my). All rights reserved.
+v4.991 16 Oct 2008  (c) 2000-2008 John Lim (jlim#natsoft.com). All rights reserved.
   Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
@@ -132,6 +132,8 @@ class ADODB_mysql extends ADOConnection {
 	// if magic quotes disabled, use mysql_real_escape_string()
 	function qstr($s,$magic_quotes=false)
 	{
+		if (is_null($s)) return 'NULL';
+
 		if (!$magic_quotes) {
 		
 			if (ADODB_PHPVER >= 0x4300) {
@@ -446,7 +448,7 @@ class ADODB_mysql extends ADOConnection {
 			$fld->not_null = ($rs->fields[2] != 'YES');
 			$fld->primary_key = ($rs->fields[3] == 'PRI');
 			$fld->auto_increment = (strpos($rs->fields[5], 'auto_increment') !== false);
-			$fld->binary = (strpos($type,'blob') !== false);
+			$fld->binary = (strpos($type,'blob') !== false || strpos($type,'binary') !== false);
 			$fld->unsigned = (strpos($type,'unsigned') !== false);	
 			$fld->zerofill = (strpos($type,'zerofill') !== false);
 			
@@ -732,6 +734,7 @@ class ADORecordSet_mysql extends ADORecordSet{
 		case 'LONGBLOB': 
 		case 'BLOB':
 		case 'MEDIUMBLOB':
+		case 'BINARY':
 			return !empty($fieldobj->binary) ? 'B' : 'X';
 			
 		case 'YEAR':
