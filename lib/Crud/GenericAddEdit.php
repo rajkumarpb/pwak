@@ -776,10 +776,11 @@ class GenericAddEdit extends GenericController {
                     // XXX FIXME hack pour advmultiselect
                     $ename = 'advmultiselect' . $this->clsname . '_' . $name . '_IDs';
                 }
-                // si une méthode custom existe on l'appelle
+                // si une méthode custom existe on l'appelle, si la methode 
+                // retourne la chaine 'pass' on cree l'element
                 $customMethod = 'render' . $name;
-                if (method_exists($this, $customMethod)) {
-                    $this->$customMethod($ename, $params);
+                if (method_exists($this, $customMethod) && 
+                    $this->$customMethod($ename, $params) !== 'pass') {
                     continue;
                 }
                 // sinon on crée l'élément
