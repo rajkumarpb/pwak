@@ -93,6 +93,8 @@ class StateMachine {
      * @return string
      **/
     public function toSQL($filter) {
+
+
         $where = '';
         $tables = array();
         if ($filter instanceof FilterComponent && !$filter->isEmpty()) {
@@ -133,7 +135,9 @@ class StateMachine {
         // clause order
         $order = '';
         $padding = '';
+
         foreach($this->_orderMacros as $macro=>$sortOrder) {
+
             $name = $this->getPropertyName($macro) ;
             if (!empty($name)) {
                 $order .= $padding . $name . ' ' .
@@ -165,6 +169,7 @@ class StateMachine {
         }
         $tokens = explode('.', $macro);
         $token = array_pop($tokens);
+
         $curState = $this->_startState;
         foreach($tokens as $tok) {
             if (strpos($tok, '@') !== false) {
@@ -179,6 +184,10 @@ class StateMachine {
                 $token = 'StringValue_' . I18n::getLocaleCode();
             }
         }
+
+        // Debug order sur supplier ...
+        if($token == "Array") return FALSE ;
+
         $token = ($token == '*')?'.*':'._' . $token;
         return 'T' . $curState->id . $token;
     }
