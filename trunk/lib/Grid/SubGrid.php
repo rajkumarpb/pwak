@@ -39,6 +39,14 @@ class SubGrid extends AbstractGrid {
         $this->itemPerPage = 1000000;
     }
 
+    /**
+     * Tableau des variables smarty qui seront assignées au moment du render
+     *
+     * @var array $_extraVars
+     **/
+    private $_extraVars = array();
+
+
     function getDataCollection($entityName, $ordre, $filtre = array())
     {
         $PageIndex = isset($_REQUEST['PageIndex'])?$_REQUEST['PageIndex']:0;
@@ -62,6 +70,10 @@ class SubGrid extends AbstractGrid {
         $aCollection = $aMapper->loadCollection($filtre, $ordre);
 
         return $aCollection;
+    }
+
+    public function assign($var, $value){
+        $this->_extraVars[$var] = $value;
     }
 
     /**
@@ -108,12 +120,21 @@ class SubGrid extends AbstractGrid {
             }
         }
         $smarty = new Template();
+
+
          // Pour permettre d'afficher un message si pas d''element a afficher!!!
         $smarty->assign('NbColumn', ($aCollection->getCount() > 0)?count($this->columns):0);
         // sert a mettre le bon colspan si pas d''element a afficher!!!
         $smarty->assign('NbColumnIfEmpty', count($this->columns));
         $smarty->assign('SubGridRow', $gridContent);
 
+        // Comme sur le grid on autorise la definition de variables pour
+        // smarty via les extraVars
+        if (is_array($this->_extraVars)) {
+            foreach($this->_extraVars as $key => $val) {
+                $smarty->assign($key, $val);
+            }
+        }
        return $smarty->fetch($templateName);
     }
 }
