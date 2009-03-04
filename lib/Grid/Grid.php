@@ -722,7 +722,7 @@ class Grid extends AbstractGrid {
      * @return void
      **/
     private function _CSVExport(){  /*$mapper, $filter=array(), $order=array()*/
-        ///set_time_limit(180);  // pour les gros exports ! INUTILE, car 300 par defaut sur KURO
+
         //Make sure that IE can download the attachments under https.
         header('Pragma: public');
         header('Content-type: application/force-download');
@@ -740,37 +740,83 @@ class Grid extends AbstractGrid {
             if (in_array($column->index, $this->hiddenColumnsByUser)) {
                 continue; // On n'affiche que les column non cachees par le user
             }
-            $columnNameArray[] = $column->title;
+
+            if($column instanceof SubGridColumn) {
+                $subgridtitles = $column->title ;
+                $subgridtitles =  str_replace("</td><td>", "", $subgridtitles);
+                $subgridtitles =  explode(" / ", $subgridtitles);
+                while (list($key,$val) = each($subgridtitles)) {
+                    $columnNameArray[] = $val ;
+                }
+            } else {
+                $columnNameArray[] = $column->title;
+            }
             $realColumnNumber++;
         }
+        
+        $s = implode($sep, $columnNameArray).$NEWLINE;
 
         $DataArray = $this->gridContent;
-        $DataArray[-1] = $columnNameArray;  // rajout des entetes de colonne
 
-        for ($i=-1;$i < count($DataArray)-1;$i++)    {
+        for ($i=0;$i < count($DataArray);$i++)    {
             $elements = array();
             for ($j=0; $j < $realColumnNumber; $j++) {
                 if (strpos($DataArray[$i][$j],"<td>") !== false) {          // Si sous-grid
-                    $SubGridDataArray = explode("</td>\n<td>", $DataArray[$i][$j]);
-                    $array = array_slice($SubGridDataArray, 1, count($SubGridDataArray) - 2);  // extrait les donnees
-                    if (count($array) > 0) {
-                        for ($k=0;$k<count($array);$k++) {
-                            $array[$k] = (strpos($array[$k],"\n\t\t\t") !== false)?substr(str_replace("\n\t\t\t", ", ", $array[$k]), 2):$array[$k];
-                            $elements[] = self::formatDataForExport($array[$k]);
+
+                    // nettoyage ....
+                    $SubGridDataArray = str_replace("\n", "", $DataArray[$i][$j]);
+                    $SubGridDataArray = str_replace("\t", "", $SubGridDataArray);
+
+                    // on recupere les lignes
+                    $SubGridLines = explode("</td></tr><tr><td>",  $SubGridDataArray);
+
+                    $subelements = array();
+                    for ($l = 0 ; $l<count($SubGridLines); $l++){
+
+                        // puis pour chaque ligne , les colonnes
+                        $SubGridRow =  explode("</td><td>",  $SubGridLines[$l]);
+
+                        // Premiere et derniere ligne de chaque subgrid
+                        // il faut virer les premiers et derniers
+                        // elements correspondants aux colonnes vides du
+                        // grid de niveau superieur
+                        if ($l == 0) array_shift($SubGridRow); 
+                        if ($l == count($SubGridLines) -1) array_pop($SubGridRow);
+
+                        if($colstoadd <  count($SubGridRow)) $colstoadd = count($SubGridRow);
+
+                        for ($m = 0 ; $m<count($SubGridRow); $m++){
+                            $subelements[$l][$m] = self::formatDataForExport($SubGridRow[$m]);
                         }
                     }
-                }
-                else {
+
+                } else {
                     $elements[] = self::formatDataForExport($DataArray[$i][$j]);
                 }
             }
-            $s .= implode($sep, $elements).$NEWLINE;
-            $line += 1;
-            if ($line % $BUFLINES == 0) {
-                echo $s;
-                $s = '';
+
+            // Si des elements d'une sous grille
+            if(count($subelements)>0) {
+                // alors on repete la ligne de base
+                for($n =0 ; $n < count($subelements) ; $n ++ ){
+                    $s .= implode($sep, $elements).$sep.implode($sep, $subelements[$n]).$NEWLINE;
+                    $line += 1;
+                    if ($line % $BUFLINES == 0) {
+                        echo $s;
+                        $s = "";
+                    }
+                }
+            } else {
+                $s .= implode($sep, $elements).$NEWLINE;
+                $line += 1;
+                if ($line % $BUFLINES == 0) {
+                    echo $s;
+                    $s = "";
+                }
             }
+
         }
+
         echo $s;
         $s = '';
         fclose($fp);
