@@ -755,13 +755,14 @@ class Grid extends AbstractGrid {
         }
         
         $s = implode($sep, $columnNameArray).$NEWLINE;
-
+        $colstoadd = 0 ;
         $DataArray = $this->gridContent;
 
         for ($i=0;$i < count($DataArray);$i++)    {
             $elements = array();
             for ($j=0; $j < $realColumnNumber; $j++) {
                 if (strpos($DataArray[$i][$j],"<td>") !== false) {          // Si sous-grid
+                    
 
                     // nettoyage ....
                     $SubGridDataArray = str_replace("\n", "", $DataArray[$i][$j]);
