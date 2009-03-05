@@ -790,6 +790,9 @@ class Grid extends AbstractGrid {
                             $subelements[$l][$m] = self::formatDataForExport($SubGridRow[$m]);
                         }
                     }
+                    // on insere cette chaine pour la remplacer plus
+                    // tard par les lignes des sous elements ...
+                    $elements[] = "%subelements%" ;
 
                 } else {
                     $elements[] = self::formatDataForExport($DataArray[$i][$j]);
@@ -800,7 +803,13 @@ class Grid extends AbstractGrid {
             if(count($subelements)>0) {
                 // alors on repete la ligne de base
                 for($n =0 ; $n < count($subelements) ; $n ++ ){
-                    $s .= implode($sep, $elements).$sep.implode($sep, $subelements[$n]).$NEWLINE;
+
+                    $tmps = implode($sep, $elements);
+                    $toreplace = "%subelements%";
+                    $replacewith = implode($sep, $subelements[$n]).$sep ;
+                    $tmps = str_replace($toreplace, $replacewith, $tmps).$NEWLINE ;
+
+                    $s .= $tmps ;
                     $line += 1;
                     if ($line % $BUFLINES == 0) {
                         echo $s;
