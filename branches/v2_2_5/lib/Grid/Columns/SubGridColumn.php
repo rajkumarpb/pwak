@@ -36,11 +36,10 @@ class SubGridColumn extends AbstractGridColumn {
      * @return void
      */
     function __construct($title = array(), $params = array()) {
-        $newTitle = '</td>';
-        for ($i = 0; $i < count($title); $i++) {
-            $newTitle .= '<td>' . $title[$i] . '</td>';
-        }
-        $newTitle .= '<td>';
+
+        $newTitle = '</td><td>';
+        $newTitle .= implode(" / " , $title );
+        $newTitle .= '</td><td>' ;
         parent::__construct($newTitle, $params);
     }
 
