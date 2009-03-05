@@ -760,6 +760,7 @@ class Grid extends AbstractGrid {
 
         for ($i=0;$i < count($DataArray);$i++)    {
             $elements = array();
+            $subelements = array();
             for ($j=0; $j < $realColumnNumber; $j++) {
                 if (strpos($DataArray[$i][$j],"<td>") !== false) {          // Si sous-grid
                     
@@ -771,7 +772,6 @@ class Grid extends AbstractGrid {
                     // on recupere les lignes
                     $SubGridLines = explode("</td></tr><tr><td>",  $SubGridDataArray);
 
-                    $subelements = array();
                     for ($l = 0 ; $l<count($SubGridLines); $l++){
 
                         // puis pour chaque ligne , les colonnes
