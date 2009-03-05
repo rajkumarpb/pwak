@@ -1,13 +1,15 @@
 </td>
-{section name=SubGridContent loop=$NbColumn}
-            <td>
-{section name=GridCol loop=$SubGridRow}
-                {$SubGridRow[GridCol][SubGridContent]}<br/>
+{section name=SubGridContent}
+<td><table class="subgrid" id="subgrid_{$commandId}">
+	{section name=GridRow loop=$SubGridRow}
+	<tr>
+		{section name=GridCol loop=$NbColumn}
+		<td>{$SubGridRow[GridRow][GridCol]}</td>
+		{/section}
+	</tr>
+	{sectionelse}
+	<tr><td>{t}N/A{/t}</td></tr>
+	{/section}
+</table></td>
 {/section}
-            </td>
-{sectionelse}
-            <td colspan="{$NbColumnIfEmpty}">
-                {t}No record found{/t}
-            </td>
-{/section}
-            <td>
+<td>
