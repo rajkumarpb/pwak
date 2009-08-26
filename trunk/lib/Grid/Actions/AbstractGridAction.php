@@ -96,6 +96,9 @@ class AbstractGridAction {
         if (isset($params['JsOwnerForm'])) {
             $this->jsOwnerForm = $params['JsOwnerForm'];
         }
+        if (isset($params['allowEmptySelection'])) {
+            $this->allowEmptySelection = $params['allowEmptySelection'];
+        }
     }
 
     /**
