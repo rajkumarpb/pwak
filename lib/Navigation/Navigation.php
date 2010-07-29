@@ -63,7 +63,7 @@ class Navigation
     public $authFunction = false;
 
     /**
-     * Titre de la page selectionnÃe
+     * Titre de la page selectionnÃƒe
      *
      * @var    string activeTitle
      * @access public
@@ -71,7 +71,7 @@ class Navigation
     public $activeTitle = '';
 
     /**
-     * Instance de la classe utilisée pour le singleton
+     * Instance de la classe utilisÃ©e pour le singleton
      *
      * @static
      * @var    object Navigation
@@ -205,10 +205,10 @@ class Navigation
         // Trade context
         $tradeContext = Preferences::get('TradeContext');
         foreach ($metadata as $index=>$data) {
-            // formatte le tableau de l'élément avec les paramètres par défaut
-            // et met son état à actif ou inactif
+            // formatte le tableau de l'Ã©lÃ©ment avec les paramÃ¨tres par dÃ©faut
+            // et met son Ã©tat Ã  actif ou inactif
             if (isset($data['restrict_to']) &&
-                !call_user_func($this->authFunction, $data['restrict_to'], array('showErrorDialog'=>false)))
+                !call_user_func($this->authFunction, $data['restrict_to'], array('showErrorDialog'=>false, 'redirect'=>false)))
             {
                     continue;
             }
@@ -346,7 +346,7 @@ class Navigation
         $return = array();
         foreach($children as $key => $data) {
             if (!isset($data['restrict_to'])
-            || call_user_func($this->authFunction, $data['restrict_to'], array('showErrorDialog'=>false))) {
+            || call_user_func($this->authFunction, $data['restrict_to'], array('showErrorDialog'=>false, 'redirect'=>false))) {
                 $return[] = $key;
             }
         }
@@ -357,7 +357,7 @@ class Navigation
 
     // Navigation::fromXML() {{{
     /**
-     * Parse un fichier XML représentant un menu et retourne un tableau.
+     * Parse un fichier XML reprÃ©sentant un menu et retourne un tableau.
      *
      * Format du XML:
      * <code>

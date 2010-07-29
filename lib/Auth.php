@@ -308,7 +308,7 @@ class Auth {
      * @return boolean
      */
     public function checkProfiles($profilesArray = array(),
-        $options = array('url'=>false , 'showErrorDialog'=>true)) {
+        $options = array('url'=>false , 'showErrorDialog'=>true, 'redirect'=>true)) {
         if (!self::$hasAuth) {
             return true;
         }
@@ -332,6 +332,9 @@ class Auth {
             }
             return true;
         } else {
+            if (isset($options['redirect']) && !$options['redirect']) {
+                return false;
+            }
             if (!isset($options['url']) || false == $options['url']) {
                 $options['url'] = $_SERVER['PHP_SELF'];
             }
