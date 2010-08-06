@@ -119,11 +119,14 @@ class Auth {
             ($dbID !== false && $user->dbID != null && $user->dbID != $dbID)) {
             unset($_SESSION[REALM_SESSION_NAME], $_SESSION[USER_SESSION_NAME]);
             return new Exception(E_AUTH_FAILED);
-        } else {
-            $_SESSION[REALM_SESSION_NAME] = $realm;
-            $_SESSION[USER_SESSION_NAME] = $user->getId();
-            return $user;
         }
+        if (method_exists($user, 'getActive') && !$user->getActive()) {
+            unset($_SESSION[REALM_SESSION_NAME], $_SESSION[USER_SESSION_NAME]);
+            return new Exception(E_AUTH_FAILED);
+        }
+        $_SESSION[REALM_SESSION_NAME] = $realm;
+        $_SESSION[USER_SESSION_NAME] = $user->getId();
+        return $user;
     }
 
     // }}}
