@@ -146,8 +146,8 @@ class AjaxServer
             // objet ni un tableau conformément au RFC
             $argv[$i] = $arg!==null?$arg:trim(urldecode($argv[$i]), '"\'');
             // gestion correcte des booléens
-            if (strtolower($argv[$i]) == 'true') $argv[$i] = true;
-            if (strtolower($argv[$i]) == 'false') $argv[$i] = false;
+            if (@strtolower($argv[$i]) == 'true') $argv[$i] = true;
+            if (@strtolower($argv[$i]) == 'false') $argv[$i] = false;
             // gestion correct des entiers et des flottants
             if (is_numeric($argv[$i]) && strpos($argv[$i], '.') === false)
                 $argv[$i] = intval($argv[$i]);
