@@ -571,7 +571,7 @@ class Template
      * @param  string $name
      * @return mixed
      */
-    private function __get($name) {
+    public function __get($name) {
         $engine = self::engine();
         if (property_exists($engine, $name)) {
             return $engine->$name;
@@ -592,7 +592,7 @@ class Template
      * @param  mixed  $value
      * @return void
      */
-    private function __set($name , $value) {
+    public function __set($name , $value) {
         $engine = self::engine();
         if (property_exists($engine, $name)) {
             $engine->$name = $value;

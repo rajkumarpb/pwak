@@ -460,7 +460,7 @@ class Grid extends AbstractGrid {
                     continue; // On n'affiche que les column non cachees par le user
                 }
                 $cellContent = $column->render($objectInstance);
-                $gridContent[$i][] = get_class($cellContent)=='exception'?'N/A':$cellContent;
+                $gridContent[$i][] = @get_class($cellContent)=='exception'?'N/A':$cellContent;
             }
             if($this->hasInlineActions) {
                 $renderer = new GridActionRendererInline($this->javascriptFormOwnerName, $gridObjectIds[$i]);

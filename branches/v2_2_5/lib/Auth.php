@@ -119,11 +119,14 @@ class Auth {
             ($dbID !== false && $user->dbID != null && $user->dbID != $dbID)) {
             unset($_SESSION[REALM_SESSION_NAME], $_SESSION[USER_SESSION_NAME]);
             return new Exception(E_AUTH_FAILED);
-        } else {
-            $_SESSION[REALM_SESSION_NAME] = $realm;
-            $_SESSION[USER_SESSION_NAME] = $user->getId();
-            return $user;
         }
+        if (method_exists($user, 'getActive') && !$user->getActive()) {
+            unset($_SESSION[REALM_SESSION_NAME], $_SESSION[USER_SESSION_NAME]);
+            return new Exception(E_AUTH_FAILED);
+        }
+        $_SESSION[REALM_SESSION_NAME] = $realm;
+        $_SESSION[USER_SESSION_NAME] = $user->getId();
+        return $user;
     }
 
     // }}}
@@ -308,7 +311,7 @@ class Auth {
      * @return boolean
      */
     public function checkProfiles($profilesArray = array(),
-        $options = array('url'=>false , 'showErrorDialog'=>true)) {
+        $options = array('url'=>false , 'showErrorDialog'=>true, 'redirect'=>true)) {
         if (!self::$hasAuth) {
             return true;
         }
@@ -332,6 +335,9 @@ class Auth {
             }
             return true;
         } else {
+            if (isset($options['redirect']) && !$options['redirect']) {
+                return false;
+            }
             if (!isset($options['url']) || false == $options['url']) {
                 $options['url'] = $_SERVER['PHP_SELF'];
             }
